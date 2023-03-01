@@ -8,7 +8,14 @@ import TextBox from '../components/TextBox.astro';
 	<main>
 		<h1>Create a Question:</h1>
         <TextBox placeholderText="Ask question here..."/>
-			
+		<label for="difficulty">Choose a difficulty:</label>
+
+        <select name="difficulty" id="difficulty">
+            <option value="Select">Select an Option</option>
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+        </select>
 
     </main>
 </Layout>
