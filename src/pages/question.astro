@@ -41,6 +41,8 @@ import TextBox from '../components/TextBox.astro';
                 </select>
             </div>
         </div>
+        <a href="#" class="post-button">Post</a>
+
 
     </main>
 </Layout>
@@ -60,6 +62,26 @@ import TextBox from '../components/TextBox.astro';
         flex-direction: column;
         width:30%;
         margin:5%
+    }
+
+    .post-button {
+    float:right;
+    margin-right: 7%;
+	background-color:#44c767;
+	border-radius:20px;
+	border:2px solid #18ab29;
+	color:#ffffff;
+	font-size:16px;
+	font-weight:bold;
+	padding:16px 16px;
+	text-decoration:none;
+    }   
+    .post-button:hover {
+        background-color:#5cbf2a;
+    }
+    .post-button:active {
+        position:relative;
+        top:1px;
     }
 
 </style>
