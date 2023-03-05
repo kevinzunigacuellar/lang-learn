@@ -9,8 +9,9 @@ import TextBox from '../components/TextBox.astro';
 		<h1>Create a Question:</h1>
         <TextBox placeholderText="Ask question here..."/>
         
-        
+        <!-- flexbox that holds 3 options for user posting question  -->
         <div class="flex-container">
+            <!-- difficulty -->
             <div class="selection-box">
                 <label class="selector-label" for="difficulty">Choose a difficulty:</label>
                 <select class="selection" name="difficulty" id="difficulty">
@@ -20,7 +21,8 @@ import TextBox from '../components/TextBox.astro';
                     <option value="Hard">Hard</option>
                 </select>
             </div>
-                
+            
+            <!-- topic -->
             <div class="selection-box">
                 <label class="selector-label" for="topic">Choose a topic:</label>
                 <select name="topic" id="topic">
@@ -31,6 +33,7 @@ import TextBox from '../components/TextBox.astro';
                 </select>
             </div>
 
+            <!-- language -->
             <div class="selection-box">
                 <label class="selector-label" for="lang">Choose a langauge:</label>
                 <select name="lang" id="language">
@@ -42,7 +45,7 @@ import TextBox from '../components/TextBox.astro';
             </div>
         </div>
         <a href="#" class="post-button">Post</a>
-
+        <!-- todo: fill in href with whatever needs to be called -->
 
     </main>
 </Layout>
@@ -54,7 +57,6 @@ import TextBox from '../components/TextBox.astro';
         width: 100%;
         text-align: center;
         line-height: 225%;
-        /* margin: 25px */
     }
     
     .selection-box {
@@ -67,10 +69,10 @@ import TextBox from '../components/TextBox.astro';
     .post-button {
     float:right;
     margin-right: 7%;
-	background-color:#44c767;
+	background-color:#18ab29;
 	border-radius:20px;
 	border:2px solid #18ab29;
-	color:#ffffff;
+	color: white;
 	font-size:16px;
 	font-weight:bold;
 	padding:16px 16px;
