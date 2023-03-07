@@ -1,9 +1,9 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
-import NewQButton from '../components/NewQButton.astro';
-import Filter from '../components/Filter.astro';
-import { PrismaClient } from '@prisma/client';
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
+import NewQButton from "../components/NewQButton.astro";
+import Filter from "../components/Filter.astro";
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 const posts = await prisma.posts.findMany();
@@ -11,79 +11,80 @@ console.log(posts);
 ---
 
 <Layout title="Welcome to Astro.">
-	<Filter/>
-	<main>
-		<h1>Welcome to <span class="text-gradient">Astro</span></h1>
-		<p class="instructions">
-			<strong>Instructions:</strong> Choose a question that intrests you and submit your response? <br>
-		</p>
-		<ul role="list" class="link-card-grid">
-			<Card
-				href="https://docs.astro.build/"
-				title="Matts Question"
-				body="What is favorite animal and why?"
-			/>
-			<Card
-				href="https://astro.build/integrations/"
-				title="Doms Question"
-				body="What is favorite color and why?"
-			/>
-			<Card
-				href="https://astro.build/themes/"
-				title="Julians Question"
-				body="What is your dream job? Why?"
-			/>
-			<Card
-				href="https://astro.build/chat/"
-				title="Kevins Question"
-				body="What is your favorite python package?"
-			/>
-		</ul>
-	</main>
-	<NewQButton href="/NewQButton"/>
+  <Filter />
+  <main>
+    <h1>Welcome to <span class="text-gradient">Astro</span></h1>
+    <p class="instructions">
+      <strong>Instructions:</strong> Choose a question that intrests you and submit
+      your response? <br />
+    </p>
+    <ul role="list" class="link-card-grid">
+      <Card
+        href="https://docs.astro.build/"
+        title="Matts Question"
+        body="What is favorite animal and why?"
+      />
+      <Card
+        href="https://astro.build/integrations/"
+        title="Doms Question"
+        body="What is favorite color and why?"
+      />
+      <Card
+        href="https://astro.build/themes/"
+        title="Julians Question"
+        body="What is your dream job? Why?"
+      />
+      <Card
+        href="https://astro.build/chat/"
+        title="Kevins Question"
+        body="What is your favorite python package?"
+      />
+    </ul>
+  </main>
+  <NewQButton href="/NewQButton" />
 </Layout>
 
 <style>
-	main {
-		margin: auto;
-		padding: 1.5rem;
-		max-width: 60ch;
-	}
-	h1 {
-		font-size: 3rem;
-		font-weight: 800;
-		margin: 0;
-	}
-	.text-gradient {
-		background-image: var(--accent-gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-size: 400%;
-		background-position: 0%;
-	}
-	.instructions {
-		line-height: 1.6;
-		margin: 1rem 0;
-		border: 1px solid rgba(var(--accent), 25%);
-		background-color: white;
-		padding: 1rem;
-		border-radius: 0.4rem;
-	}
-	.instructions code {
-		font-size: 0.875em;
-		font-weight: bold;
-		background: rgba(var(--accent), 12%);
-		color: rgb(var(--accent));
-		border-radius: 4px;
-		padding: 0.3em 0.45em;
-	}
-	.instructions strong {
-		color: rgb(var(--accent));
-	}
-	.link-card-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-		gap: 1rem;
-		padding: 0;
-	}
+  main {
+    margin: auto;
+    padding: 1.5rem;
+    max-width: 60ch;
+  }
+  h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin: 0;
+  }
+  .text-gradient {
+    background-image: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 400%;
+    background-position: 0%;
+  }
+  .instructions {
+    line-height: 1.6;
+    margin: 1rem 0;
+    border: 1px solid rgba(var(--accent), 25%);
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.4rem;
+  }
+  .instructions code {
+    font-size: 0.875em;
+    font-weight: bold;
+    background: rgba(var(--accent), 12%);
+    color: rgb(var(--accent));
+    border-radius: 4px;
+    padding: 0.3em 0.45em;
+  }
+  .instructions strong {
+    color: rgb(var(--accent));
+  }
+  .link-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+    gap: 1rem;
+    padding: 0;
+  }
 </style>
