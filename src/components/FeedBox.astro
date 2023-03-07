@@ -9,17 +9,17 @@ export interface Props {
 const { question, difficulty, topic, posterID } = Astro.props;
 const href = "/postID"
 
+// Difficulty flag color 
 var difficultyColor;
-
-switch(difficulty) {
-    case "Easy":
+if (difficulty == "Easy") {
         difficultyColor = "rgb(85 200 100)";
-    case "Medium":
+}
+else if (difficulty == "Medium") {
         difficultyColor = "rgb(220 150 70)";
-    case "Hard":
+} 
+else {
         difficultyColor = "rgb(220 70 70)";
 }
-
 
 ---
 
