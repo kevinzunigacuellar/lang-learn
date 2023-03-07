@@ -13,6 +13,7 @@ datasource db {
 
 model User {
   name            String
+  username        String
   email           String
   target_language String
   id              String      @id @default(cuid())
@@ -27,10 +28,10 @@ model Responses {
   response_id      String   @id @default(cuid())
   response_content String
   response_comment String
-  user_id          String
   user             User     @relation(fields: [user_id], references: [id])
-  post_id          String
+  user_id          String
   post             Posts    @relation(fields: [post_id], references: [post_id])
+  post_id          String
   created_at       DateTime @default(now())
   updated_at       DateTime @updatedAt
 
@@ -42,8 +43,8 @@ model Posts {
   post_id       String      @id @default(cuid())
   question      String
   has_response  Boolean
-  user_id       String
   user          User        @relation(fields: [user_id], references: [id])
+  user_id       String
   post_language String
   created_at    DateTime    @default(now())
   updated_at    DateTime    @updatedAt
