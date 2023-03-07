@@ -2,10 +2,9 @@
 export interface Props {
 	text: string;
 	href: string;
-    float?: string;
 }
 
-const { text, href, float } = Astro.props;
+const { text, href } = Astro.props;
 ---
 
 <li class="nav-button">
