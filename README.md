@@ -1,3 +1,18 @@
+# How to run our project
+
+## Installs
+pnpm - https://pnpm.io/installation
+
+astro
+
+## Commands
+pnpm install
+
+pnpm run dev
+
+# Sprint 1 Goals
+
+
 # Astro Starter Kit: Basics
 
 ## 🧞 Commands
