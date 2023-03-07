@@ -1,11 +1,13 @@
 # How to run our project
 
 ## Installs
-pnpm
+pnpm - https://pnpm.io/installation
+
 astro
 
 ## Commands
 pnpm install
+
 pnpm run dev
 
 # Sprint 1 Goals
