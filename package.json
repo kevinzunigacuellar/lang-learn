@@ -10,13 +10,16 @@
 		"check": "astro check",
 		"astro": "astro",
 		"prisma:generate": "prisma generate",
-		"prisma:studio": "prisma studio"
+		"prisma:studio": "prisma studio",
+		"format": "prettier --write --plugin-search-dir=. ."
 	},
 	"dependencies": {
 		"@prisma/client": "^4.11.0",
 		"astro": "^2.0.16"
 	},
 	"devDependencies": {
+		"prettier": "^2.8.4",
+		"prettier-plugin-astro": "^0.8.0",
 		"prisma": "^4.11.0"
 	}
 }
