@@ -7,7 +7,10 @@
 		"start": "astro dev",
 		"build": "astro build",
 		"preview": "astro preview",
-		"astro": "astro"
+		"check": "astro check",
+		"astro": "astro",
+		"prisma:generate": "prisma generate",
+		"prisma:studio": "prisma studio"
 	},
 	"dependencies": {
 		"@prisma/client": "^4.11.0",
