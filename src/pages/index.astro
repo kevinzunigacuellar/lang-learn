@@ -3,6 +3,11 @@ import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 import NewQButton from '../components/NewQButton.astro';
 import Filter from '../components/Filter.astro';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
+const posts = await prisma.posts.findMany();
+console.log(posts);
 ---
 
 <Layout title="Welcome to Astro.">
