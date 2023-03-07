@@ -23,28 +23,33 @@ else {
 
 ---
 
-<li class="link-card">
+<li class="feed-card">
 	<a href={href}>
         <h2>
             {question}
         </h2>
         <p id="difficulty" class="flag">{difficulty}</p>
         <p id="topic" class="flag">{topic}</p>
-
 	</a>
+    <div class="profile">Poster: </div>
 </li>
 <style define:vars={{ difficultyColor }}>
+    .profile {
+        float: right;
+        font-size: 1.25rem;
+        padding: 1rem 1.3rem;
+    }
     #difficulty {
         background-color: var(--difficultyColor);
     }
     .flag {
-        float: right;
+        float: left;
         margin: 5px;
         padding: 5px;
         border: solid;
-        border-radius: 6px;
+        border-radius: .6em;
     }
-	.link-card {
+	.feed-card {
 		list-style: none;
 		display: flex;
 		padding: 0.25rem;
@@ -58,8 +63,8 @@ else {
         margin: 15px;
 	}
 
-	.link-card > a {
-		width: 100%;
+	.feed-card > a {
+		/* width: 100%; */
 		text-decoration: none;
 		line-height: 1.4;
 		padding: 1rem 1.3rem;
@@ -78,11 +83,11 @@ else {
 		margin-bottom: 0;
 		color: #444;
 	}
-	.link-card:is(:hover, :focus-within) {
+	.feed-card:is(:hover, :focus-within) {
 		background-position: 0;
 		background-image: var(--accent-gradient);
 	}
-	.link-card:is(:hover, :focus-within) h2 {
+	.feed-card:is(:hover, :focus-within) h2 {
 		color: rgb(var(--accent));
 	}
 </style>
