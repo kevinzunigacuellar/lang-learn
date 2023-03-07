@@ -11,6 +11,22 @@ pnpm install
 pnpm run dev
 
 # Sprint 1 Goals
+## From Sprint 1 Goals
+Create GitLab Repo - here
+Setup Firebase Account - we ended up not using firebase because we found an easier platform to host our database and site. Planet Scale and Vercel
+Setup Firebase Database
+Setup Firebase Host Server
+Working Barebones Home Page - look at index.astro!
+Database Schema - created on Planet Scale
+Login page - in progress. Look at login.astro
+## Overdeliver
+Setup Planet Scale database and schema
+Create question asking page
+Profile Page
+
+
+
+
 
 
 # Astro Starter Kit: Basics
