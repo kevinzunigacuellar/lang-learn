@@ -1,0 +1,15 @@
+---
+import Navigation from "../components/Navigation.astro";;
+
+const response = await fetch('https://randomuser.me/api/');
+const data = await response.json();
+const user = data.results[0];
+---
+
+<h1>
+    {user.name}
+</h1>
+
+<h2>
+    Target Language: {user.target_language}
+</h2>
