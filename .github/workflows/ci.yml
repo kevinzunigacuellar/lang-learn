@@ -21,13 +21,13 @@ jobs:
       - name: Setup PNPM
         uses: pnpm/action-setup@v2.2.1
         with:
-            version: 7
+          version: 7
 
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-            node-version: 18
-            cache: pnpm
+          node-version: 18
+          cache: pnpm
 
       - name: Install dependencies
         run: pnpm install
