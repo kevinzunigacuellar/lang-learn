@@ -4,11 +4,11 @@ import { PrismaClient } from '@prisma/client';
 
 const { id } = Astro.params;
 const prisma = new PrismaClient();
-const user = await prisma.user.findUnique({
-    where: {
-        name: id
-    }
-});
+// const user = await prisma.user.findUnique({
+//     where: {
+//         name: id
+//     }
+// });
 
 ---
 
