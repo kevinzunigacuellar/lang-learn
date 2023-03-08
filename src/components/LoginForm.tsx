@@ -1,5 +1,5 @@
 import { Suspense, createSignal, createResource, Show } from "solid-js";
-import { loginSchema } from '../lib/schemas'
+import { loginSchema } from "../lib/schemas";
 
 async function postFormData(formData: FormData) {
   const response = await fetch("/api/login", {
@@ -38,7 +38,9 @@ export default function LoginForm() {
         required
       />
       <Show when={errors()}>
-        {errors().fieldErrors.username && <pre>{errors().fieldErrors.username}</pre>}
+        {errors().fieldErrors.username && (
+          <pre>{errors().fieldErrors.username}</pre>
+        )}
       </Show>
       <label for="password">Password</label>
       <input
@@ -49,7 +51,9 @@ export default function LoginForm() {
         required
       />
       <Show when={errors()}>
-        {errors().fieldErrors.password && <pre>{errors().fieldErrors.password}</pre>}
+        {errors().fieldErrors.password && (
+          <pre>{errors().fieldErrors.password}</pre>
+        )}
       </Show>
       <button class="bg-gray-900 p-2 rounded-md mt-4 text-white">Send</button>
       <Suspense>{response() && <p>{response().message}</p>}</Suspense>

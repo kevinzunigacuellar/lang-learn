@@ -4,7 +4,7 @@ import { loginSchema } from "../../lib/schemas";
 export const post: APIRoute = async ({ request }) => {
   const formData = await request.formData();
   const result = loginSchema.safeParse(formData);
-  
+
   if (!result.success) {
     return new Response(
       JSON.stringify({
