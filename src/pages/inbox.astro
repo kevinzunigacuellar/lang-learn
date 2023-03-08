@@ -1,14 +1,22 @@
 ---
-import FeedBox from '../components/FeedBox.astro';
-import Layout from '../layouts/Layout.astro';
+import FeedBox from "../components/FeedBox.astro";
+import Layout from "../layouts/Layout.astro";
 ---
 
-
 <Layout title="Inbox">
-	<main>
-		<h1>Inbox</h1>
-        <FeedBox question="What is your favorite color?" difficulty="Medium" topic="Personal" posterID="5"/>
-        <FeedBox question="How is a role model for you?" difficulty="Hard" topic="Personal" posterID="7"/>
-    </main>
-
+  <main>
+    <h1>Inbox</h1>
+    <FeedBox
+      question="What is your favorite color?"
+      difficulty="Medium"
+      topic="Personal"
+      posterID="5"
+    />
+    <FeedBox
+      question="How is a role model for you?"
+      difficulty="Hard"
+      topic="Personal"
+      posterID="7"
+    />
+  </main>
 </Layout>

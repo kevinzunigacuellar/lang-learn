@@ -1,49 +1,42 @@
-# How to run our project
+# Language Learning
 
-## Installs
-pnpm - https://pnpm.io/installation
+## Getting started
 
-astro
+To get started, run the following commands:
 
-## Commands
+1. Install dependencies:
+
+```bash
 pnpm install
+```
 
+2. Generate a prisma client:
+
+- Create a file called ".env" in the root of the folder
+- Put our secret key in that file (if you ask nicely, maybe we'll tell you)
+
+```bash
+pnpm run prisma:generate
+```
+
+3. Start the development server:
+
+```bash
 pnpm run dev
+```
 
-# Sprint 1 Goals
-## From Sprint 1 Goals
-Create GitLab Repo - here
-Setup Firebase Account - we ended up not using firebase because we found an easier platform to host our database and site. Planet Scale and Vercel
-Setup Firebase Database
-Setup Firebase Host Server
-Working Barebones Home Page - look at index.astro!
-Database Schema - created on Planet Scale
-Login page - in progress. Look at login.astro
-## Overdeliver
-Setup Planet Scale database and schema
-Create question asking page
-Profile Page
+## Sprint 1
 
+### Main goals
 
+- [x] Create GitLab/GitHub Repo
+- [x] Setup Firebase Account, we ended up not using firebase because we found an easier platform to host our database and site. PlanetScale and Vercel
+- [x] Setup a database schema in PlanetScale
+- [x] Setup Vercel hosting
+- [x] Create markup for the dashboard/index page
+- [ ] Create a login page
 
+### Secondary goals
 
-
-
-# Astro Starter Kit: Basics
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                | Action                                           |
-| :--------------------- | :----------------------------------------------- |
-| `pnpm install`          | Installs dependencies                            |
-| `pnpm run dev`          | Starts local dev server at `localhost:3000`      |
-| `pnpm run build`        | Build your production site to `./dist/`          |
-| `pnpm run preview`      | Preview your build locally, before deploying     |
-| `pnpm run astro ...`    | Run CLI commands like `astro add`, `astro check` |
-| `pnpm run astro --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- [x] Create question asking page
+- [ ] Create a profile Page
