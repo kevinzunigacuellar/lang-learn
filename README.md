@@ -12,6 +12,9 @@ pnpm install
 
 2. Generate a prisma client:
 
+- Create a file called ".env" in the root of the folder
+- Put our secret key in that file (if you ask nicely, maybe we'll tell you)
+
 ```bash
 pnpm run prisma:generate
 ```
