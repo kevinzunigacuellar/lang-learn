@@ -1,52 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import TextBox from "../components/TextBox.astro";
+import PostForm from "../components/PostForm";
 ---
 
 <Layout title="Ask a question!">
   <main>
     <h1>Create a Question:</h1>
-    <TextBox placeholderText="Ask question here..." />
-
-    <!-- flexbox that holds 3 options for user posting question  -->
-    <div class="flex-container">
-      <!-- difficulty -->
-      <div class="selection-box">
-        <label class="selector-label" for="difficulty"
-          >Choose a difficulty:</label
-        >
-        <select class="selection" name="difficulty" id="difficulty">
-          <option value="Select">Select an Option</option>
-          <option value="Easy">Easy</option>
-          <option value="Medium">Medium</option>
-          <option value="Hard">Hard</option>
-        </select>
-      </div>
-
-      <!-- topic -->
-      <div class="selection-box">
-        <label class="selector-label" for="topic">Choose a topic:</label>
-        <select name="topic" id="topic">
-          <option value="Select">Select an Option</option>
-          <option value="Politics">Politics</option>
-          <option value="DailyLife">Daily Life</option>
-          <option value="Philosophy">Philosophy</option>
-        </select>
-      </div>
-
-      <!-- language -->
-      <div class="selection-box">
-        <label class="selector-label" for="lang">Choose a langauge:</label>
-        <select name="lang" id="language">
-          <option value="Select">Select an Option</option>
-          <option value="Spanish">Spanish</option>
-          <option value="French">French</option>
-          <option value="English">English</option>
-        </select>
-      </div>
-    </div>
-    <a href="#" class="post-button">Post</a>
-    <!-- todo: fill in href with whatever needs to be called -->
+    <PostForm client:load></PostForm>
   </main>
 </Layout>
 
