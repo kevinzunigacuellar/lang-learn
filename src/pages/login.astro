@@ -1,0 +1,9 @@
+---
+import Layout from "../layouts/Layout.astro";
+import LoginForm from "../components/LoginForm";
+---
+
+<Layout title="login">
+  <h1 class="text-4xl font-extrabold my-2">Login</h1>
+  <LoginForm client:load />
+</Layout>
