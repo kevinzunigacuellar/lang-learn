@@ -3,25 +3,47 @@ import NavBarButton from "./Link.astro";
 ---
 
 <ul role="list">
-  <NavBarButton href="/.." text="Home" />
-  <p class="site-title">Langauge Learner</p>
-  <NavBarButton href="/inbox" text="Inbox" />
-  <NavBarButton href="/profile" text="Profile" />
+    <NavBarButton 
+        href="/.." 
+        text="Home"
+    />
+    <h1>Welcome to <span class="text-gradient">Language Learner :)</span></h1>
+    <NavBarButton 
+        href="/inbox" 
+        text="Inbox"
+
+    />
+    <NavBarButton 
+        href="/profile" 
+        text="Profile"
+    />
 </ul>
 
 <style>
-  ul {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .site-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin: 0 1rem;
-  }
+    h1 {
+        font-size: 3rem;
+        font-weight: 800;
+		margin: 0;
+    }
+    .text-gradient {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+	}
+    ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .site-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 0 1rem;
+    }
 </style>
