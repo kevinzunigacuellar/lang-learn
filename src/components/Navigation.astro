@@ -9,7 +9,7 @@ import NavBarButton from './Link.astro';
         href="/.." 
         text="Home"
     />
-    <p class="site-title">Langauge Learner</p>
+    <h1>Welcome to <span class="text-gradient">Language Learner :)</span></h1>
     <NavBarButton 
         href="/inbox" 
         text="Inbox"
@@ -22,6 +22,18 @@ import NavBarButton from './Link.astro';
 </ul>
 
 <style>
+    h1 {
+        font-size: 3rem;
+        font-weight: 800;
+		margin: 0;
+    }
+    .text-gradient {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+	}
     ul {
         display: flex;
         flex-direction: row;

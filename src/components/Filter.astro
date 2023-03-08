@@ -3,34 +3,63 @@ import NavBarButton from './Link.astro';
 
 ---
 
-<form name="contact-form" method="POST" action="/submit-form">
-    <fieldset>
-        <legend><strong>Select your Difficulty:</strong></legend>
-        <p> 
-            <input type="radio" name="Difficulty" value="Easy" id="Easy">
-            <label for="Easy">Easy</label>
-        </p>
-        <p>
-            <input type="radio" name="Difficulty" value="Hard" id="Hard">
-            <label for="Hard">Hard</label>
-        </p>
-    </fieldset>
-  
-    <fieldset>
-        <legend><strong>Select your Language:</strong></legend>
-        <p> 
-            <input type="radio" name="Language" value="English" id="English">
-            <label for="English">English</label>
-        </p>
-        <p>
-            <input type="radio" name="Language" value="Spanish" id="Spanish">
-            <label for="Spanish">Spanish</label>
-        </p>
-    </fieldset>
-    <button>Set</button>
-</form>
+<main>
+    <form name="contact-form" method="POST" action="/submit-form">
+        <fieldset>
+            <legend><strong>Select your Difficulty:</strong></legend>
+            <p> 
+                <input type="radio" name="Difficulty" value="Easy" id="Easy">
+                <label for="Easy">Easy</label>
+            </p>
+            <p> 
+                <input type="radio" name="Difficulty" value="Medium" id="Medium">
+                <label for="Medium">Medium</label>
+            </p>
+            <p>
+                <input type="radio" name="Difficulty" value="Hard" id="Hard">
+                <label for="Hard">Hard</label>
+            </p>
+        </fieldset>
+    
+        <fieldset>
+            <legend><strong>Select your Language:</strong></legend>
+            <p> 
+                <input type="radio" name="Language" value="English" id="English">
+                <label for="English">English</label>
+            </p>
+            <p>
+                <input type="radio" name="Language" value="Spanish" id="Spanish">
+                <label for="Spanish">Spanish</label>
+            </p>
+            <p>
+                <input type="radio" name="Language" value="French" id="French">
+                <label for="French">French</label>
+            </p>
+        </fieldset>
+
+        <fieldset>
+            <legend><strong>Select your Topic:</strong></legend>
+            <p> 
+                <input type="radio" name="Topic" value="Politics" id="Politics">
+                <label for="Politics">Politics</label>
+            </p>
+            <p>
+                <input type="radio" name="Topic" value="Daily Life" id="Daily Life">
+                <label for="Daily Life">Daily Life</label>
+            </p>
+            <p>
+                <input type="radio" name="Topic" value="Philosophy" id="Philosophy">
+                <label for="Philosophy">Philosophy</label>
+            </p>
+        </fieldset>
+        <button>Set</button>
+    </form>
+</main>
 
 <style>
+    main {
+        padding-top: 50px;
+    }
     form {
         float:left;
         list-style: none;
