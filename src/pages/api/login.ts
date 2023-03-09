@@ -15,6 +15,13 @@ export const post: APIRoute = async ({ request }) => {
   }
 
   const { username, password } = result.data;
+  // TODO: Check if user exists
+  // return new Response(
+  //   JSON.stringify({
+  //     message: "User is not registered",
+  //   }),
+  //   { status: 400 }
+  // );
   // TODO: Authenticate user
   // TODO: Set session cookie
   // TODO: Redirect to dashboard
