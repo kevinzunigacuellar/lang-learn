@@ -1,11 +1,9 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { PrismaClient } from '@prisma/client';
-
-const username = Astro.params.username;
-const prisma = new PrismaClient();
+import prisma from "../../lib/prisma";
 
 // get user profile information via dynamic routing of the username in the url
+const username = Astro.params.username;
 const user = await prisma.user.findFirst({
   where: {
     username: username
