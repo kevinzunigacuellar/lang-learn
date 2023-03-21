@@ -1,11 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import TextBox from '../../components/TextBox.astro';
-import Navigation from "../../components/Navigation.astro";;
 import { PrismaClient } from '@prisma/client';
 
 const username = Astro.params.username;
-console.log(username);
 const prisma = new PrismaClient();
 
 // get user profile information via dynamic routing of the username in the url
@@ -14,8 +11,6 @@ const user = await prisma.user.findFirst({
     username: username
   }
 });
-
-console.log(user);
 ---
 
 <Layout title="Ask a question!">
