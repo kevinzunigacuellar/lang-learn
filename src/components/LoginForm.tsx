@@ -66,7 +66,7 @@ export default function LoginForm() {
           <pre>{errors()?.fieldErrors.password}</pre>
         )}
       </Show>
-      <button class="bg-gray-900 p-2 rounded-md mt-4 text-white">Send</button>
+      <button id="loginBtn" class="bg-gray-900 p-2 rounded-md mt-4 text-white">Send</button>
       <Suspense>
         <Show when={!response.error} fallback={<p>{response.error.message}</p>}>
           <pre>{response()}</pre>
