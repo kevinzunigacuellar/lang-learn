@@ -1,22 +1,26 @@
 ---
 export interface Props {
   title: string;
-  body: string;
+  time: Date;
+  language: string;
   href: string;
 }
 
-const { href, title, body } = Astro.props;
+const { href, title, time, language} = Astro.props;
 ---
 
 <li class="link-card">
   <a href={href}>
-    <h2>
+    <h1>
       {title}
       <span>&rarr;</span>
+    </h1>
+    <h2>
+      {language}
     </h2>
-    <p>
-      {body}
-    </p>
+    <h3>
+      {time}
+    </h3>
   </a>
 </li>
 <style>
@@ -44,9 +48,20 @@ const { href, title, body } = Astro.props;
     background-color: white;
     opacity: 0.8;
   }
+  h1 {
+    margin: 0;
+    font-size: 1.50rem;
+    transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
   h2 {
     margin: 0;
     font-size: 1.25rem;
+    text-decoration: underline;
+    transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  h3 {
+    margin: 0;
+    font-size: 0.75rem;
     transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
   }
   p {
@@ -58,7 +73,7 @@ const { href, title, body } = Astro.props;
     background-position: 0;
     background-image: var(--accent-gradient);
   }
-  .link-card:is(:hover, :focus-within) h2 {
+  .link-card:is(:hover, :focus-within) h1 {
     color: rgb(var(--accent));
   }
 </style>
