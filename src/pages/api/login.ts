@@ -20,6 +20,7 @@ export const post: APIRoute = async ({ redirect, request, cookies }) => {
           { status: 401 }
         );
       });
+    console.log(sessionCookie)
   } catch (error: any) {
     return new Response(
       JSON.stringify({
@@ -33,5 +34,5 @@ export const post: APIRoute = async ({ redirect, request, cookies }) => {
     path: "/",
   });
 
-  return redirect("/dashboard", 302);
+  return redirect("/", 302);
 };
