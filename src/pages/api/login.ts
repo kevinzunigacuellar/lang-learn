@@ -1,35 +1,37 @@
 import type { APIRoute } from "astro";
-import { loginSchema } from "../../lib/schemas";
+import { auth } from "../../lib/firebase/server";
 
-export const post: APIRoute = async ({ request }) => {
-  const formData = await request.formData();
-  const result = loginSchema.safeParse(formData);
+export const post: APIRoute = async ({ redirect, request, cookies }) => {
+  let sessionCookie;
+  try {
+    /* Get the ID token */
+    const { idToken } = await request.json();
 
-  if (!result.success) {
+    /* Verify the ID token */
+    await auth.verifyIdToken(idToken);
+    const fiveDays = 60 * 60 * 24 * 5 * 1000;
+    sessionCookie = await auth
+      .createSessionCookie(idToken, { expiresIn: fiveDays })
+      .catch((error) => {
+        return new Response(
+          JSON.stringify({
+            message: error.message,
+          }),
+          { status: 401 }
+        );
+      });
+  } catch (error: any) {
     return new Response(
       JSON.stringify({
-        errors: result.error.flatten(),
+        error: "The server is on fire",
       }),
-      { status: 400 }
+      { status: 401 }
     );
   }
 
-  const { username, password } = result.data;
-  // TODO: Check if user exists
-  // return new Response(
-  //   JSON.stringify({
-  //     message: "User is not registered",
-  //   }),
-  //   { status: 400 }
-  // );
-  // TODO: Authenticate user
-  // TODO: Set session cookie
-  // TODO: Redirect to dashboard
+  cookies.set("session", sessionCookie, {
+    path: "/",
+  });
 
-  return new Response(
-    JSON.stringify({
-      message: "Successfully logged in",
-    }),
-    { status: 200 }
-  );
+  return redirect("/dashboard", 302);
 };
