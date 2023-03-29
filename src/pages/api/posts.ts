@@ -1,7 +1,6 @@
 import type { APIRoute } from "astro";
 import { postSchema } from "../../lib/schemas";
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import prisma from "../../lib/prisma";
 
 export const post: APIRoute = async ({ request }) => {
   const postData = await request.formData();
