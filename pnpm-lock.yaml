@@ -1,26 +1,36 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@astrojs/react': ^2.1.0
   '@astrojs/solid-js': ^2.1.0
   '@astrojs/tailwind': ^3.1.0
   '@astrojs/vercel': ^3.2.0
   '@prisma/client': ^4.11.0
   '@tailwindcss/forms': ^0.5.3
+  '@types/react': ^18.0.21
+  '@types/react-dom': ^18.0.6
   astro: ^2.1.0
   prettier: ^2.8.4
   prettier-plugin-astro: ^0.8.0
   prisma: ^4.11.0
+  react: ^18.0.0
+  react-dom: ^18.0.0
   solid-js: ^1.4.3
   tailwindcss: ^3.0.24
   zod: ^3.21.4
   zod-form-data: ^2.0.0
 
 dependencies:
+  '@astrojs/react': 2.1.0_a5pki22omvhg66elofc4io3beq
   '@astrojs/solid-js': 2.1.0_solid-js@1.6.12
   '@astrojs/tailwind': 3.1.0_o5pmjyiyxefuvlue2yryq6hdmq
-  '@astrojs/vercel': 3.2.0_astro@2.1.0
+  '@astrojs/vercel': 3.2.0_astro@2.1.0+react@18.2.0
   '@prisma/client': 4.11.0_prisma@4.11.0
+  '@types/react': 18.0.31
+  '@types/react-dom': 18.0.11
   astro: 2.1.0
+  react: 18.2.0
+  react-dom: 18.2.0_react@18.2.0
   solid-js: 1.6.12
   tailwindcss: 3.2.7
   zod: 3.21.4
@@ -103,6 +113,25 @@ packages:
       prismjs: 1.29.0
     dev: false
 
+  /@astrojs/react/2.1.0_a5pki22omvhg66elofc4io3beq:
+    resolution: {integrity: sha512-AzopsCVjsHlX1oVkgLusDRngnpJfoi03kj6c8p/K6+i/PQ3ZnVwRmJl7IgFBC2YJSbexyNxK2BmLvwkjGvQaCA==}
+    engines: {node: '>=16.12.0'}
+    peerDependencies:
+      '@types/react': ^17.0.50 || ^18.0.21
+      '@types/react-dom': ^17.0.17 || ^18.0.6
+      react: ^17.0.2 || ^18.0.0
+      react-dom: ^17.0.2 || ^18.0.0
+    dependencies:
+      '@babel/core': 7.21.0
+      '@babel/plugin-transform-react-jsx': 7.21.0_@babel+core@7.21.0
+      '@types/react': 18.0.31
+      '@types/react-dom': 18.0.11
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /@astrojs/solid-js/2.1.0_solid-js@1.6.12:
     resolution: {integrity: sha512-p07DP9NRWJPjtF+CzPZ9lzOMkoyw6wSs3S6g3OZUxR+DVQy3VIXXDqCcnZZVJI34VakkHuViZaoNNkBW/9I54w==}
     engines: {node: '>=16.12.0'}
@@ -149,13 +178,13 @@ packages:
       - supports-color
     dev: false
 
-  /@astrojs/vercel/3.2.0_astro@2.1.0:
+  /@astrojs/vercel/3.2.0_astro@2.1.0+react@18.2.0:
     resolution: {integrity: sha512-7dHknRFezjtk07+pcDHHkWNwlha9k8+dKi/5cfTP4k9laFdlQSskZtc9IsSTwn4/yBVT6klg0P4z0e0W+e+WEQ==}
     peerDependencies:
       astro: ^2.1.0
     dependencies:
       '@astrojs/webapi': 2.1.0
-      '@vercel/analytics': 0.1.11
+      '@vercel/analytics': 0.1.11_react@18.2.0
       '@vercel/nft': 0.22.6
       astro: 2.1.0
       fast-glob: 3.2.12
@@ -831,8 +860,30 @@ packages:
     resolution: {integrity: sha512-SuT16Q1K51EAVPz1K29DJ/sXjhSQ0zjvsypYJ6tlwVsRV9jwW5Adq2ch8Dq8kDBCkYnELS7N7VNCSB5nC56t/g==}
     dev: false
 
+  /@types/prop-types/15.7.5:
+    resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
+    dev: false
+
+  /@types/react-dom/18.0.11:
+    resolution: {integrity: sha512-O38bPbI2CWtgw/OoQoY+BRelw7uysmXbWvw3nLWO21H1HSh+GOlqPuXshJfjmpNlKiiSDG9cc1JZAaMmVdcTlw==}
+    dependencies:
+      '@types/react': 18.0.31
+    dev: false
+
+  /@types/react/18.0.31:
+    resolution: {integrity: sha512-EEG67of7DsvRDU6BLLI0p+k1GojDLz9+lZsnCpCRTa/lOokvyPBvp8S5x+A24hME3yyQuIipcP70KJ6H7Qupww==}
+    dependencies:
+      '@types/prop-types': 15.7.5
+      '@types/scheduler': 0.16.3
+      csstype: 3.1.1
+    dev: false
+
   /@types/resolve/1.20.2:
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
+    dev: false
+
+  /@types/scheduler/0.16.3:
+    resolution: {integrity: sha512-5cJ8CB4yAx7BH1oMvdU0Jh9lrEXyPkar6F9G/ERswkCuvP4KQZfZkSjcMbAICCpQTN4OuZn8tz0HiKv9TGZgrQ==}
     dev: false
 
   /@types/unist/2.0.6:
@@ -843,10 +894,12 @@ packages:
     resolution: {integrity: sha512-iO9ZQHkZxHn4mSakYV0vFHAVDyEOIJQrV2uZ06HxEPcx+mt8swXoZHIbaaJ2crJYFfErySgktuTZ3BeLz+XmFA==}
     dev: false
 
-  /@vercel/analytics/0.1.11:
+  /@vercel/analytics/0.1.11_react@18.2.0:
     resolution: {integrity: sha512-mj5CPR02y0BRs1tN3oZcBNAX9a8NxsIUl9vElDPcqxnMfP0RbRc9fI9Ud7+QDg/1Izvt5uMumsr+6YsmVHcyuw==}
     peerDependencies:
       react: ^16.8||^17||^18
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /@vercel/nft/0.22.6:
@@ -2025,6 +2078,13 @@ packages:
     resolution: {integrity: sha512-9Ri+o0JYgehTaVBBDoMqIl8GXtbWg711O3srftcHhZ0dqnETqLaoIK0x17fUw9rFSlK/0NlsKe0Ahhyl5pXE2g==}
     dev: false
 
+  /loose-envify/1.4.0:
+    resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
+    hasBin: true
+    dependencies:
+      js-tokens: 4.0.0
+    dev: false
+
   /lru-cache/5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
     dependencies:
@@ -2880,6 +2940,23 @@ packages:
     resolution: {integrity: sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==}
     engines: {node: '>=10'}
 
+  /react-dom/18.2.0_react@18.2.0:
+    resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
+    peerDependencies:
+      react: ^18.2.0
+    dependencies:
+      loose-envify: 1.4.0
+      react: 18.2.0
+      scheduler: 0.23.0
+    dev: false
+
+  /react/18.2.0:
+    resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}
+    engines: {node: '>=0.10.0'}
+    dependencies:
+      loose-envify: 1.4.0
+    dev: false
+
   /read-cache/1.0.0:
     resolution: {integrity: sha512-Owdv/Ft7IjOgm/i0xvNDZ1LrRANRfew4b2prF3OWMQLxLfu3bS8FVhCsrSCMK4lR56Y9ya+AThoTpDCTxCmpRA==}
     dependencies:
@@ -3071,6 +3148,12 @@ packages:
     resolution: {integrity: sha512-hXdxU6PCkiV3XAiSnX+XLqz2ohHoEnVUlrd8LEVMAI80uB1+OTScIkH9n6qQwImZpTye1r1WG1rbGUteHNhoHg==}
     dependencies:
       suf-log: 2.5.3
+
+  /scheduler/0.23.0:
+    resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==}
+    dependencies:
+      loose-envify: 1.4.0
+    dev: false
 
   /section-matter/1.0.0:
     resolution: {integrity: sha512-vfD3pmTzGpufjScBh50YHKzEu2lxBWhVEHsNGoEXmCmn2hKGfeNLYMzCJpe8cD7gqX7TJluOVpBkAequ6dgMmA==}
