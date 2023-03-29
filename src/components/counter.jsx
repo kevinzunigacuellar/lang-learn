@@ -23,7 +23,8 @@ const questions = {
   };
   
 
-  const App = ({posts}) => {
+  const App = ({posts: dbposts}) => {
+    const [posts, setPosts] = useState(dbposts);
     const [difficulty, setDifficulty] = useState('');
     const [language, setLanguage] = useState('');
     const [showAllQuestions, setShowAllQuestions] = useState(false);

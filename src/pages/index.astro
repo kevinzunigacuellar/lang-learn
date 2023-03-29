@@ -33,7 +33,7 @@ console.log(posts);
       ))}
     </ul>
   </main>
-  <Counter {...someProps} client:only="react">
+  <Counter posts={posts} client:only="react">
     <h1>Hello, React!</h1>
   </Counter>
   <NewQButton href="/NewQButton" />
