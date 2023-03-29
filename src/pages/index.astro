@@ -2,11 +2,13 @@
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
 import NewQButton from "../components/NewQButton.astro";
-import Filter from "../components/Filter.astro";
+import Counter from '../components/counter.jsx';
+const someProps = {
+	count: 0,
+};
 ---
 
 <Layout title="Language Learner">
-  <Filter />
   <main>
     <h1>Choose A Question!</h1>
     <p class="instructions">
@@ -36,10 +38,19 @@ import Filter from "../components/Filter.astro";
       />
     </ul>
   </main>
+  <Counter posts={posts} client:only="react">
+    <h1>Hello, React!</h1>
+  </Counter>
   <NewQButton href="/NewQButton" />
 </Layout>
 
 <style>
+button {
+  border: 1px solid black;
+  margin: 5px;
+  padding: 5px;
+}
+
   main {
     margin: auto;
     padding: 1.5rem;
