@@ -2,6 +2,10 @@
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
 import NewQButton from "../components/NewQButton.astro";
+import Counter from '../components/counter.jsx';
+const someProps = {
+	count: 0,
+};
 import Filter from "../components/Filter.astro";
 import { auth } from "../lib/firebase/server";
 import LogoutButton from "../components/SignoutButton";
@@ -29,26 +33,29 @@ console.log("all those crispy posts:\n");
 console.log(posts);
 ---
 
+
 <Layout title="Language Learner">
-  <Filter />
   <main>
     <h1>Choose A Question!</h1>
     <p class="instructions">
       <strong>Instructions:</strong> Choose a question that intrests you and submit
       your response? <br />
     </p>
-    <ul role="list" class="link-card-grid">
-      {posts.map((post) => (
-        <li>
-          <Card href="" title={post.question} language={post.post_language} time={post.created_at}></Card>
-        </li>
-      ))}
-    </ul>
+    
   </main>
+  <Counter posts={posts} client:only="react">
+    <h1>Hello, React!</h1>
+  </Counter>
   <NewQButton href="/NewQButton" />
 </Layout>
 
 <style>
+button {
+  border: 1px solid black;
+  margin: 5px;
+  padding: 5px;
+}
+
   main {
     margin: auto;
     padding: 1.5rem;

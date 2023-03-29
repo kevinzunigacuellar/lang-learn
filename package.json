@@ -14,11 +14,16 @@
     "format": "prettier --write --plugin-search-dir=. src"
   },
   "dependencies": {
+    "@astrojs/react": "^2.1.0",
     "@astrojs/solid-js": "^2.1.0",
     "@astrojs/tailwind": "^3.1.0",
     "@astrojs/vercel": "^3.2.0",
     "@prisma/client": "^4.11.0",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
     "astro": "^2.1.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "firebase": "^9.18.0",
     "firebase-admin": "^11.5.0",
     "solid-js": "^1.4.3",
