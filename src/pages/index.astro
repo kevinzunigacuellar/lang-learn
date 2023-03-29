@@ -7,6 +7,22 @@ const someProps = {
 	count: 0,
 };
 import Filter from "../components/Filter.astro";
+import { auth } from "../lib/firebase/server";
+import LogoutButton from "../components/SignoutButton";
+
+/* Get session cookie */
+const sessionCookie = Astro.cookies.get("session").value;
+if (!sessionCookie) {
+  return Astro.redirect("/login");
+}
+/* Verify session cookie and get user */
+let user;
+try {
+  const decodedClaims = await auth.verifySessionCookie(sessionCookie, true);
+  user = await auth.getUser(decodedClaims.uid);
+} catch (error) {
+  return Astro.redirect("/login");
+}
 
 import prisma from "../lib/prisma";
 
