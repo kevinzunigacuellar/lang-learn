@@ -25,13 +25,7 @@ console.log(posts);
       <strong>Instructions:</strong> Choose a question that intrests you and submit
       your response? <br />
     </p>
-    <ul role="list" class="link-card-grid">
-      {posts.map((post) => (
-        <li>
-          <Card href="" title={post.question} language={post.post_language} time={post.created_at}></Card>
-        </li>
-      ))}
-    </ul>
+    
   </main>
   <Counter posts={posts} client:only="react">
     <h1>Hello, React!</h1>

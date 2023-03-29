@@ -1,24 +1,25 @@
 import React, { useState } from 'react';
+import './style.css';
 
 const questions = {
-    easy: {
-      english: [
+    Easy: {
+      English: [
         'What is the capital of France?',
         'What is the largest country in South America?',
         'What is the smallest state in the USA?',
       ],
-      spanish: '¿Cuál es la capital de España?',
-      french: 'Quelle est la capitale de l\'Italie?'
+      Spanish: '¿Cuál es la capital de España?',
+      French: 'Quelle est la capitale de l\'Italie?'
     },
-    medium: {
-      english: 'What is the largest planet in our solar system?',
-      spanish: '¿Cuál es el planeta más cercano al sol?',
-      french: 'Quelle est la planète la plus proche de la Terre?'
+    Medium: {
+      English: 'What is the largest planet in our solar system?',
+      Spanish: '¿Cuál es el planeta más cercano al sol?',
+      French: 'Quelle est la planète la plus proche de la Terre?'
     },
-    hard: {
-      english: 'What is the smallest country in the world by land area?',
-      spanish: '¿Cuál es el país más grande de América Latina?',
-      french: 'Quel est le plus grand pays d\'Afrique?'
+    Hard: {
+      English: 'What is the smallest country in the world by land area?',
+      Spanish: '¿Cuál es el país más grande de América Latina?',
+      French: 'Quel est le plus grand pays d\'Afrique?'
     }
   };
   
@@ -51,31 +52,31 @@ const questions = {
     };
   
     return (
-      <div>
+      <div class = "boarder">
         <button onClick={handleAllQuestionsClick}>All Questions</button><br />
         <button onClick={handleResetClick}>Reset</button>
         <div>
           <h2>Select Language:</h2>
-          <button onClick={() => handleLanguageClick('english')} style={{ backgroundColor: language === 'english' ? 'green' : 'white' }}>English</button>
-          <button onClick={() => handleLanguageClick('spanish')} style={{ backgroundColor: language === 'spanish' ? 'green' : 'white' }}>Spanish</button>
-          <button onClick={() => handleLanguageClick('french')} style={{ backgroundColor: language === 'french' ? 'green' : 'white' }}>French</button>
+          <button onClick={() => handleLanguageClick('English')} style={{ backgroundColor: language === 'English' ? 'green' : 'white' }}>English</button>
+          <button onClick={() => handleLanguageClick('Spanish')} style={{ backgroundColor: language === 'Spanish' ? 'green' : 'white' }}>Spanish</button>
+          <button onClick={() => handleLanguageClick('French')} style={{ backgroundColor: language === 'French' ? 'green' : 'white' }}>French</button>
         </div>
         {language && (
           <div>
             <h2>Select Difficulty:</h2>
-            <button onClick={() => handleDifficultyClick('easy')} style={{ backgroundColor: difficulty === 'easy' ? 'green' : 'white' }}>Easy</button>
-            <button onClick={() => handleDifficultyClick('medium')} style={{ backgroundColor: difficulty === 'medium' ? 'green' : 'white' }}>Medium</button>
-            <button onClick={() => handleDifficultyClick('hard')} style={{ backgroundColor: difficulty === 'hard' ? 'green' : 'white' }}>Hard</button>
+            <button onClick={() => handleDifficultyClick('Easy')} style={{ backgroundColor: difficulty === 'Easy' ? 'green' : 'white' }}>Easy</button>
+            <button onClick={() => handleDifficultyClick('Medium')} style={{ backgroundColor: difficulty === 'Medium' ? 'green' : 'white' }}>Medium</button>
+            <button onClick={() => handleDifficultyClick('Hard')} style={{ backgroundColor: difficulty === 'Hard' ? 'green' : 'white' }}>Hard</button>
           </div>
         )}
         {language && difficulty && (
-          <div>
+          <div className="center">
             <h2>Question:</h2>
             <p>{questions[difficulty][language]}</p>
           </div>
         )}
         {showAllQuestions && (
-          <div>
+          <div className="center">
             <h2>All Questions:</h2>
             <ul>
               {Object.keys(questions).map(difficulty => (
