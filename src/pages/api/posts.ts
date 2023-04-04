@@ -1,6 +1,11 @@
-import type { APIRoute } from "astro";
+import type { APIRoute, AstroGlobal } from "astro";
 import { postSchema } from "../../lib/schemas";
 import prisma from "../../lib/prisma";
+// import { auth } from "../../lib/firebase/server"
+
+// get cookie
+// TODO: get the cookie somehow
+
 
 export const post: APIRoute = async ({ request }) => {
   const postData = await request.formData();
@@ -18,11 +23,6 @@ export const post: APIRoute = async ({ request }) => {
 
   // gather post data
   const { question, difficulty, topic, language } = result.data;
-  const user = prisma.user.findUnique({
-    where: {
-      id: "0",
-    },
-  });
 
   // send data to db
   await prisma.posts.create({
@@ -30,7 +30,7 @@ export const post: APIRoute = async ({ request }) => {
       question: question,
       post_language: language,
       has_response: false,
-      user_id: "cleyl3tpx0000o7uo25vuq383",
+      user_id: user.uid,    // this is pull from the cookie data
     },
   });
 
