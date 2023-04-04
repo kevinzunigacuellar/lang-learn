@@ -2,6 +2,8 @@ import type { APIRoute } from "astro";
 import { postSchema } from "../../lib/schemas";
 import prisma from "../../lib/prisma";
 
+TextDecoderStream
+
 export const post: APIRoute = async ({ request }) => {
   const postData = await request.formData();
   console.log(postData);
