@@ -1,6 +1,22 @@
 ---
 import FeedBox from "../components/FeedBox.astro";
 import Layout from "../layouts/Layout.astro";
+import { auth } from "../lib/firebase/server";
+
+
+/* Get session cookie */
+const sessionCookie = Astro.cookies.get("session").value;
+if (!sessionCookie) {
+  return Astro.redirect("/login");
+}
+/* Verify session cookie and get user */
+let user;
+try {
+  const decodedClaims = await auth.verifySessionCookie(sessionCookie, true);
+  user = await auth.getUser(decodedClaims.uid);
+} catch (error) {
+  return Astro.redirect("/login");
+}
 ---
 
 <Layout title="Inbox">
