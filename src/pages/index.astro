@@ -1,14 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
 import NewQButton from "../components/NewQButton.astro";
-import Counter from '../components/counter.jsx';
-const someProps = {
-	count: 0,
-};
-import Filter from "../components/Filter.astro";
+import ListOfQuestions from "../components/ListOfQuestions";
 import { auth } from "../lib/firebase/server";
-import LogoutButton from "../components/SignoutButton";
+import prisma from "../lib/prisma";
 
 /* Get session cookie */
 const sessionCookie = Astro.cookies.get("session").value;
@@ -24,54 +19,27 @@ try {
   return Astro.redirect("/login");
 }
 
-import prisma from "../lib/prisma";
-
 // load in posts from database
 const posts = await prisma.posts.findMany();
-
-console.log("all those crispy posts:\n");
-console.log(posts);
 ---
 
-
 <Layout title="Language Learner">
-  <main>
-    <h1>Choose A Question!</h1>
+  <main class="max-w-3xl mx-auto px-4">
+    <h1 class="font-4xl text-3xl font-bold mt-4 text-purple-600">Choose a question</h1>
     <p class="instructions">
       <strong>Instructions:</strong> Choose a question that intrests you and submit
       your response? <br />
     </p>
-    
+    <ListOfQuestions posts={posts} client:load />
+    <NewQButton href="/NewQButton" />
   </main>
-  <Counter posts={posts} client:only="react">
-    <h1>Hello, React!</h1>
-  </Counter>
-  <NewQButton href="/NewQButton" />
 </Layout>
 
 <style>
-button {
-  border: 1px solid black;
-  margin: 5px;
-  padding: 5px;
-}
-
-  main {
-    margin: auto;
-    padding: 1.5rem;
-    max-width: 60ch;
-  }
-  h1 {
-    font-size: 2rem;
-    font-weight: 800;
-    margin: 0;
-  }
-  .text-gradient {
-    background-image: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 400%;
-    background-position: 0%;
+  button {
+    border: 1px solid black;
+    margin: 5px;
+    padding: 5px;
   }
   .instructions {
     line-height: 1.6;
@@ -91,11 +59,5 @@ button {
   }
   .instructions strong {
     color: rgb(var(--accent));
-  }
-  .link-card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-    gap: 1rem;
-    padding: 0;
   }
 </style>
