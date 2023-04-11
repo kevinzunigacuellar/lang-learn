@@ -15,6 +15,7 @@ try {
   const decodedClaims = await auth.verifySessionCookie(sessionCookie, true);
   user = await auth.getUser(decodedClaims.uid);
 } catch (error) {
+    console.log("Not logged in! Error: " + error);
   return Astro.redirect("/login");
 }
 
