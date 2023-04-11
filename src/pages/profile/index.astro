@@ -1,4 +1,81 @@
 ---
-/* use session cookie to populate this page*/ 
+// imports
+import Layout from "../../layouts/Layout.astro";
+import prisma from "../../lib/prisma";
+import { auth } from "../../lib/firebase/server"
+
+/* Get session cookie */
+const sessionCookie = Astro.cookies.get("session").value;
+if (!sessionCookie) {
+  return Astro.redirect("/login");
+}
+/* Verify session cookie and get user */
+let user;
+try {
+  const decodedClaims = await auth.verifySessionCookie(sessionCookie, true);
+  user = await auth.getUser(decodedClaims.uid);
+} catch (error) {
+  return Astro.redirect("/login");
+}
+
+// load in posts from database
+const userData = await prisma.user.findFirst({
+    where: {
+        id: user.uid,
+    }
+});
+console.log(user.uid);
+
 ---
-My profile
+
+<Layout title="Your Profile">
+    <main>
+      <h1>Profile Page</h1>
+      <h2>Name: {userData?.name}</h2>
+      <h2>Username: {userData?.username}</h2>
+      <h2>Email: {userData?.email}</h2>
+      <h2>Target language: {userData?.target_language}</h2>
+    </main>
+  </Layout>
+  
+  <style>
+    h1,
+    h2 {
+      text-align: center;
+    }
+    .flex-container {
+      display: flex;
+      flex-wrap: nowrap;
+      width: 100%;
+      text-align: center;
+      line-height: 225%;
+    }
+  
+    .selection-box {
+      display: flex;
+      flex-direction: column;
+      width: 30%;
+      margin: 5%;
+    }
+  
+    .post-button {
+      float: right;
+      margin-right: 7%;
+      background-color: #18ab29;
+      border-radius: 20px;
+      border: 2px solid #18ab29;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 16px 16px;
+      text-decoration: none;
+    }
+    .post-button:hover {
+      background-color: #5cbf2a;
+    }
+    .post-button:active {
+      position: relative;
+      top: 1px;
+    }
+  </style>
+  
