@@ -26,7 +26,7 @@ export const post: APIRoute = async ({ request, redirect }) => {
 
   try {
     // add usr to firebase
-    await auth.createUser({
+    const userData = await auth.createUser({
       email,
       password,
       displayName: name,
@@ -40,7 +40,7 @@ export const post: APIRoute = async ({ request, redirect }) => {
         password: "no passwords here",
         email: email,
         target_language: targetLanguage,
-        id: String(getUserIdFromCookie(document.cookie)),
+        id: userData.uid,
       },
     });
 
