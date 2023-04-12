@@ -24,6 +24,8 @@ const userPasswordSchema = z.object({
 const register = userPasswordSchema
   .extend({
     name: zfd.text(z.string().min(2, "Name must be at least 2 character long")),
+    username: zfd.text(z.string().min(2, "Username must be at least 2 character long")),
+    targetLanguage: zfd.text(z.string().min(2, "Target Language must be at least 2 character long")),
     confirmPassword: zfd.text(
       z.string().min(8, "Password must be at least 8 characters long")
     ),
