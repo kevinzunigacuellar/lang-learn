@@ -17,13 +17,13 @@ const ListOfQuestions = ({ posts: dbposts }) => {
 
   return (
     <div className="grid grid-cols-4 gap-4">
-      <ul className="hidden sm:block">
+      <ul className="hidden sm:block fixed top-50 left-10">
         <h3 className="font-semibold mb-2">Languages</h3>
         <div className="flex flex-col gap-2">
           {uniqueLanguages.map((language) => (
             <button
               key={language}
-              className={`px-4 inline-block rounded ${
+              className={`px-4 py-4 inline-block rounded ${
                 activeLanguage === language ? "bg-blue-200" : "bg-white"
               }`}
               onClick={() => handleLanguageChange(language)}
@@ -33,7 +33,7 @@ const ListOfQuestions = ({ posts: dbposts }) => {
           ))}
         </div>
       </ul>
-      <div className="col-span-full sm:col-span-3 grid grid-cols-1 gap-3">
+      <div className="col-span-full sm:col-span-4 grid grid-cols-2 gap-2">
         {posts.map((post) => (
           <Question post={post} key={post.post_id} />
         ))}
@@ -44,7 +44,7 @@ const ListOfQuestions = ({ posts: dbposts }) => {
 
 function Question({ post }) {
   return (
-    <article className="flex flex-col gap-2 p-6 border items-baseline rounded-md">
+    <article className="flex flex-col gap-2 p-6 border items-baseline rounded-md bg-white">
       <span className="inline-block px-2 bg-blue-200 text-xs uppercase font-medium text-blue-800 rounded-md">
         {post.post_language}
       </span>

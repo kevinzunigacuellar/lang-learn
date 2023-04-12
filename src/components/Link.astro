@@ -16,6 +16,9 @@ const { text, href } = Astro.props;
 </li>
 <style>
   .nav-button {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
     float: left;
     list-style: none;
     display: inline;
@@ -31,10 +34,10 @@ const { text, href } = Astro.props;
   }
 
   .nav-button > a {
-    /* width: 100%; */
+     width: 100%; 
     display: block;
-    /* text-decoration: none;
-		line-height: 1.4; */
+     text-decoration: none;
+		line-height: 1.4; 
     padding: 1rem 1.3rem;
     border-radius: 0.35rem;
     color: #111;
@@ -51,11 +54,11 @@ const { text, href } = Astro.props;
     margin-bottom: 0;
     color: #444;
   }
-  /* .nav-button:is(:hover, :focus-within) {
+  .nav-button:is(:hover, :focus-within) {
 		background-position: 0;
 		background-image: var(--accent-gradient);
 	}
 	.nav-button:is(:hover, :focus-within) h2 {
 		color: rgb(var(--accent));
-	} */
+	} 
 </style>

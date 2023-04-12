@@ -24,15 +24,20 @@ const posts = await prisma.posts.findMany();
 ---
 
 <Layout title="Language Learner">
+  <div class="content-container">
   <main class="max-w-3xl mx-auto px-4">
-    <h1 class="font-4xl text-3xl font-bold mt-4 text-purple-600">Choose a question</h1>
+    <h1 class="font-4xl text-3xl font-bold mt-4 text-purple-600">Choose a Question</h1>
     <p class="instructions">
       <strong>Instructions:</strong> Choose a question that intrests you and submit
       your response? <br />
     </p>
-    <ListOfQuestions posts={posts} client:load />
-    <NewQButton href="/NewQButton" />
+    
+      <ListOfQuestions posts={posts} client:load />
+      <div class="button-container">
+        <NewQButton href="/NewQButton" />
+      </div>
   </main>
+  </div>
 </Layout>
 
 <style>
@@ -41,14 +46,24 @@ const posts = await prisma.posts.findMany();
     margin: 5px;
     padding: 5px;
   }
-  .instructions {
-    line-height: 1.6;
-    margin: 1rem 0;
-    border: 1px solid rgba(var(--accent), 25%);
-    background-color: white;
-    padding: 1rem;
-    border-radius: 0.4rem;
+  .button-container {
+    position: fixed;
+    top: 400px;
+    right: 20px;
   }
+  .content-container {
+    margin-top: 50px; 
+    text-align: center;
+  }
+  .instructions {
+  line-height: 1.6;
+  margin: 1rem auto;
+  border: 2px solid rgba(var(--accent), 25%);
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.4rem;
+  max-width: 800px; 
+}
   .instructions code {
     font-size: 0.875em;
     font-weight: bold;

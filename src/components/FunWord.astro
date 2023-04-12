@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <title id="title">:)</title>
+    <style>
+      #displayedTitle {
+        opacity: 0;
+        transition: opacity 0.5s ease-out;
+      }
+      h1 {
+        font-size: 3rem;
+        font-weight: 800;
+        margin: 0;
+      }
+      .text-gradient {
+        background-image: var(--accent-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-size: 400%;
+        background-position: 0%;
+      }
+      ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .site-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 0 1rem;
+      }
+    </style>
+    <script>
+      var i = 0;
+      var titles = ["Hola", "你好", "Bonjour"]; 
+      setInterval(function(){
+        var title = titles[i];
+        document.getElementById("title").innerHTML = title;
+        document.getElementById("displayedTitle").style.opacity = 0;
+        setTimeout(function() {
+          document.getElementById("displayedTitle").innerHTML = title; 
+          document.getElementById("displayedTitle").style.opacity = 1; 
+        }, 100); 
+        i = (i + 1) % titles.length;
+      }, 6000); 
+    </script>
+  </head>
+  <body>
+    <h1 id="displayedTitle"></h1>
+  </body>
+</html>
