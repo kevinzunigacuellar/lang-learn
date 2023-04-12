@@ -32,7 +32,8 @@ export const post: APIRoute = async ({ request }) => {
       question: question,
       post_language: language,
       has_response: false,
-      user_id: "cleyl3tpx0000o7uo25vuq383",
+
+      user_id: "cleyl3tpx0000o7uo25vuq383",    // this is pull from the cookie data
     },
   });
 
