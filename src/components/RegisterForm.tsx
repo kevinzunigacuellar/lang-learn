@@ -69,6 +69,7 @@ import {
             <Error message={clientErrors()?.fieldErrors.name} />
           </Show>
         </div>
+
         <div class="grid grid-cols-1 gap-2">
           <label for="email" class="font-medium text-zinc-300 text-sm">
             Email
@@ -86,6 +87,42 @@ import {
             <Error message={clientErrors()?.fieldErrors.email} />
           </Show>
         </div>
+
+        <div class="grid grid-cols-1 gap-2">
+          <label for="username" class="font-medium text-zinc-300 text-sm">
+            Username
+          </label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            class="rounded-md py-1 px-3 bg-zinc-800 text-zinc-300 border border-zinc-700 focus:border-pink-500 focus:outline-none focus:ring-2 focus:ring-pink-600 focus:bg-zinc-900 focus:ring-opacity-60"
+          />
+          <Show
+            when={clientErrors()?.fieldErrors.username}
+            fallback={<ErrorPlaceholder />}
+          >
+            <Error message={clientErrors()?.fieldErrors.username} />
+          </Show>
+        </div>
+        <div class="grid grid-cols-1 gap-2">
+          <label for="targetLanguage" class="font-medium text-zinc-300 text-sm">
+            Target Language
+          </label>
+          <input
+            type="text"
+            id="targetLanguage"
+            name="targetLanguage"
+            class="rounded-md py-1 px-3 bg-zinc-800 text-zinc-300 border border-zinc-700 focus:border-pink-500 focus:outline-none focus:ring-2 focus:ring-pink-600 focus:bg-zinc-900 focus:ring-opacity-60"
+          />
+          <Show
+            when={clientErrors()?.fieldErrors.targetLanguage}
+            fallback={<ErrorPlaceholder />}
+          >
+            <Error message={clientErrors()?.fieldErrors.targetLanguage} />
+          </Show>
+        </div>
+
         <div class="grid grid-cols-1 gap-2">
           <label for="password" class="font-medium text-zinc-300 text-sm">
             Password
@@ -103,6 +140,7 @@ import {
             <Error message={clientErrors()?.fieldErrors.password} />
           </Show>
         </div>
+
         <div class="grid grid-cols-1 gap-2">
           <label for="confirmPassword" class="font-medium text-zinc-300 text-sm">
             Confirm password
@@ -120,6 +158,7 @@ import {
             <Error message={clientErrors()?.fieldErrors.confirmPassword} />
           </Show>
         </div>
+
         <button
           class="bg-zinc-100 py-1.5 border border-zinc-100 rounded-md mt-2 text-black font-medium text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-600 focus:ring-offset-zinc-900"
           type="submit"
