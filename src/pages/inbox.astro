@@ -1,8 +1,7 @@
 ---
-import FeedBox from "../components/FeedBox.astro";
 import Layout from "../layouts/Layout.astro";
 import { auth } from "../lib/firebase/server";
-
+import prisma from "../lib/prisma"
 
 /* Get session cookie */
 const sessionCookie = Astro.cookies.get("session").value;
@@ -17,22 +16,23 @@ try {
 } catch (error) {
   return Astro.redirect("/login");
 }
+/* find my posts */
+const myPosts = await prisma.posts.findMany({
+  where: {
+    user_id: user.uid
+  }
+})
 ---
 
 <Layout title="Inbox">
   <main>
     <h1>Inbox</h1>
-    <FeedBox
-      question="What is your favorite color?"
-      difficulty="Medium"
-      topic="Personal"
-      posterID="5"
-    />
-    <FeedBox
-      question="How is a role model for you?"
-      difficulty="Hard"
-      topic="Personal"
-      posterID="7"
-    />
+    <ul>
+      {myPosts.map((post) => (
+        <li class="p-4 border">
+          <p>{post.question}</p>
+          <p>{post.post_language}</p>
+          </li>
+      ))}
   </main>
 </Layout>
