@@ -9,6 +9,10 @@
       #displayedTitle.fade-in {
         opacity: 1;
       }
+      #displayedTitle.fade-out {
+        opacity: 0;
+        transition: opacity 1s ease-out;
+      }
       .slide-in {
         transform: translateY(-100%);
         animation: slide-in 1s ease-out forwards;
@@ -51,21 +55,31 @@
       }
     </style>
     <script>
-      var i = 0;
-      var titles = ["¡Hola!", "你好!", "Bonjour!"]; 
-      setInterval(function(){
-        var title = titles[i];
-        document.getElementById("title").innerHTML = title;
-        var displayedTitle = document.getElementById("displayedTitle");
-        displayedTitle.classList.remove("fade-in");
-        displayedTitle.classList.add("slide-out");
-        setTimeout(function() {
-          displayedTitle.innerHTML = title;
-          displayedTitle.classList.remove("slide-out");
-          displayedTitle.classList.add("slide-in", "fade-in");
-        }, 500); 
-        i = (i + 1) % titles.length;
-      }, 6000); 
+var i = 0;
+var titles = ["¡Hola!", "你好!", "Bonjour! "]; 
+
+// Execute first iteration immediately
+var title = titles[i];
+document.getElementById("title").innerHTML = title;
+var displayedTitle = document.getElementById("displayedTitle");
+displayedTitle.innerHTML = title;
+displayedTitle.classList.add("slide-in", "fade-in");
+i = (i + 1) % titles.length;
+
+// Execute subsequent iterations every 6 seconds
+setInterval(function(){
+  var title = titles[i];
+  document.getElementById("title").innerHTML = title;
+  displayedTitle.classList.remove("fade-in");
+  displayedTitle.classList.add("fade-out");
+  setTimeout(function() {
+    displayedTitle.innerHTML = title;
+    displayedTitle.classList.remove("fade-out");
+    displayedTitle.classList.add("slide-in", "fade-in");
+  }, 500); 
+  i = (i + 1) % titles.length;
+}, 6000); 
+
     </script>
   </head>
   <body>

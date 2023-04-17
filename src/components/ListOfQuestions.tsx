@@ -24,7 +24,7 @@ const ListOfQuestions = ({ posts: dbposts }) => {
             <button
               key={language}
               className={`px-4 py-4 inline-block rounded ${
-                activeLanguage === language ? "bg-blue-200" : "bg-white"
+                activeLanguage === language ? "bg-purple-200" : "bg-white"
               }`}
               onClick={() => handleLanguageChange(language)}
             >

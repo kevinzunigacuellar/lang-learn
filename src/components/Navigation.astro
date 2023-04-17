@@ -3,7 +3,7 @@ import NavBarButton from "./Link.astro";
 import FunWord from "./FunWord.astro";
 ---
 
-<ul role="list">
+<ul role="list" class="nav">
   <NavBarButton href="/.." text="Home" />
   <h1>Welcome to <span class="text-gradient">Language Learner!</span> </h1>
   <div class="funword-container">
@@ -14,6 +14,11 @@ import FunWord from "./FunWord.astro";
 </ul>
 
 <style>
+  .nav {
+    background-color: plum;
+    border-radius: 20px;
+    padding-bottom: 15px;
+  }
   h1 {
     font-size: 3rem;
     font-weight: 800;
@@ -33,7 +38,7 @@ import FunWord from "./FunWord.astro";
     align-items: center;
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 10px;
   }
   .site-title {
     font-size: 1.5rem;
