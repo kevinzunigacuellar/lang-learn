@@ -4,7 +4,24 @@
     <style>
       #displayedTitle {
         opacity: 0;
-        transition: opacity 0.5s ease-out;
+        transition: opacity 1s ease-out;
+      }
+      #displayedTitle.fade-in {
+        opacity: 1;
+      }
+      .slide-in {
+        transform: translateY(-100%);
+        animation: slide-in 1s ease-out forwards;
+      }
+      .slide-out {
+        animation: slide-out 1s ease-out forwards;
+      }
+      @keyframes slide-in {
+        100% { transform: translateY(0); }
+      }
+      @keyframes slide-out {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(100%); }
       }
       h1 {
         font-size: 3rem;
@@ -35,15 +52,18 @@
     </style>
     <script>
       var i = 0;
-      var titles = ["Hola", "你好", "Bonjour"]; 
+      var titles = ["¡Hola!", "你好!", "Bonjour!"]; 
       setInterval(function(){
         var title = titles[i];
         document.getElementById("title").innerHTML = title;
-        document.getElementById("displayedTitle").style.opacity = 0;
+        var displayedTitle = document.getElementById("displayedTitle");
+        displayedTitle.classList.remove("fade-in");
+        displayedTitle.classList.add("slide-out");
         setTimeout(function() {
-          document.getElementById("displayedTitle").innerHTML = title; 
-          document.getElementById("displayedTitle").style.opacity = 1; 
-        }, 100); 
+          displayedTitle.innerHTML = title;
+          displayedTitle.classList.remove("slide-out");
+          displayedTitle.classList.add("slide-in", "fade-in");
+        }, 500); 
         i = (i + 1) % titles.length;
       }, 6000); 
     </script>
