@@ -27,6 +27,7 @@ export default function PostForm() {
       console.log(errors);
     }
     setFormData(data);
+    window.location.href = "/..";
   }
 
   return (
