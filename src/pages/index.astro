@@ -31,8 +31,9 @@ const posts = await prisma.posts.findMany();
       <strong>Instructions:</strong> Choose a question that intrests you and submit
       your response? <br />
     </p>
-    
-      <ListOfQuestions posts={posts} client:load />
+      <div class = "question-container">
+        <ListOfQuestions posts={posts} client:load />
+      </div>
       <div class="button-container">
         <NewQButton href="/NewQButton" />
       </div>
@@ -41,6 +42,14 @@ const posts = await prisma.posts.findMany();
 </Layout>
 
 <style>
+  .question-container {
+    background-color: white;
+    border: 2px solid rgba(var(--accent), 25%);
+    padding: 1rem;
+    border-radius: 0.4rem;
+    max-width: 800px; 
+    margin: 2rem auto;
+  }
   button {
     border: 1px solid black;
     margin: 5px;

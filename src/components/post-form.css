@@ -14,7 +14,7 @@ form {
   }
   #question {
     height: 100px;
-    width: 1000px;
+    width: 600px;
   }
   
   .selection option {
@@ -72,12 +72,12 @@ form {
     padding: 18px;
     border-radius: 14px;
     border: none;
-    background-color: #007bff;
+    background-color: plum;
     color: #fff;
     cursor: pointer;
   }
   
   .post-button:hover {
-    background-color: #d900ce;
+    background-color:rgb(var(--accent));;
   }
   

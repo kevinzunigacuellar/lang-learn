@@ -6,7 +6,9 @@ import FunWord from "./FunWord.astro";
 <ul role="list">
   <NavBarButton href="/.." text="Home" />
   <h1>Welcome to <span class="text-gradient">Language Learner!</span> </h1>
-  <FunWord/>
+  <div class="funword-container">
+    <FunWord/>
+  </div>
   <NavBarButton href="/inbox" text="Inbox" />
   <NavBarButton href="/profile" text="Profile" />
 </ul>
@@ -37,5 +39,13 @@ import FunWord from "./FunWord.astro";
     font-size: 1.5rem;
     font-weight: 600;
     margin: 0 1rem;
+  }
+  .funword-container {
+    width: 120px;
+    height: 60px;
+    margin: 0 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 </style>
