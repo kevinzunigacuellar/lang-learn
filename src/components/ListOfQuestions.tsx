@@ -17,8 +17,8 @@ const ListOfQuestions = ({ posts: dbposts }) => {
 
   return (
     <div className="grid grid-cols-4 gap-4">
-      <ul className="hidden sm:block fixed top-50 left-10">
-        <h3 className="font-semibold mb-2">Languages</h3>
+      <ul className="hidden sm:block fixed top-50 left-20">
+        <h2 className="font-semibold mb-2">Languages</h2>
         <div className="flex flex-col gap-2">
           {uniqueLanguages.map((language) => (
             <button

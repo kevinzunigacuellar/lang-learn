@@ -1,6 +1,7 @@
 import { Suspense, createSignal, createResource, Show } from "solid-js";
 import { postSchema } from "../lib/schemas";
 import "./post-form.css"
+import "./style.css"
 
 async function postFormData(formData: FormData) {
   const response = await fetch("/api/posts", {
@@ -32,7 +33,7 @@ export default function PostForm() {
 
   return (
     <form onSubmit={submit}>
-      <div class="input">
+      <div class="flex-container">
         <label class="selector-label" for="quesion">
           Type a Question:
         </label>
@@ -76,7 +77,7 @@ export default function PostForm() {
           </select>
         </div>
       </div>
-      <button type="submit" class="post-button">
+      <button type="submit" class="btn-97">
         Post
       </button>
     </form>
