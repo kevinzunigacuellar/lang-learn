@@ -17,7 +17,7 @@ model User {
   email           String
   target_language String
   id              String      @id @default(cuid())
-  password        String
+  firebase_id     String
   created_at      DateTime    @default(now())
   updated_at      DateTime    @updatedAt
   Responses       Responses[]

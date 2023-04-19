@@ -37,10 +37,9 @@ export const post: APIRoute = async ({ request, redirect }) => {
       data: {
         name: name,
         username: username,
-        password: "no passwords here",
         email: email,
         target_language: targetLanguage,
-        id: userData.uid,
+        id: userData.uid as string,
       },
     });
 
