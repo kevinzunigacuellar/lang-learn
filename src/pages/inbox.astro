@@ -36,3 +36,89 @@ const myPosts = await prisma.posts.findMany({
       ))}
   </main>
 </Layout>
+
+<style>
+  .flex-container {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    text-align: center;
+    line-height: 225%;
+  }
+
+  .selection-box {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin: 5%;
+  }
+
+  .post-button {
+    float: right;
+    margin-right: 7%;
+    background-color: #18ab29;
+    border-radius: 20px;
+    border: 2px solid #18ab29;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 16px 16px;
+    text-decoration: none;
+  }
+  .post-button:hover {
+    background-color: #5cbf2a;
+  }
+  .post-button:active {
+    position: relative;
+    top: 1px;
+  }
+
+
+  button {
+    border: 1px solid black;
+    margin: 5px;
+    padding: 5px;
+  }
+  .button-container {
+    position: fixed;
+    top: 400px;
+    right: 20px;
+  }
+  .content-container {
+    margin-top: 50px; 
+  }
+  .instructions {
+  line-height: 1.6;
+  margin: 1rem auto;
+  border: 2px solid rgba(var(--accent), 25%);
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.4rem;
+  max-width: 800px; 
+}
+
+
+
+.instructions code {
+  font-size: 0.875em;
+  font-weight: bold;
+  background: rgba(var(--accent), 12%);
+  color: rgb(var(--accent));
+  border-radius: 4px;
+  padding: 0.3em 0.45em;
+  max-width: 90%; 
+}
+
+  .instructions strong {
+    color: rgb(var(--accent));
+  }
+  .font-4xl {
+  text-align: center;
+  margin-top:50px;
+}
+
+.instructions {
+  text-align: center;
+}
+</style>
