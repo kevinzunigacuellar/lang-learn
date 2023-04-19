@@ -1,5 +1,7 @@
 import { initializeApp } from "firebase/app";
 
+// This data is for connecting to the Firebase project for authentication
+// and database access. It is not sensitive data! Firebase says this can be plain text
 const firebaseConfig = {
     apiKey: "AIzaSyATszqPiuQcEluvSaELG2wqowZHViZWfug",
     authDomain: "language-learner-6f7e2.firebaseapp.com",
