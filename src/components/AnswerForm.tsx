@@ -10,7 +10,7 @@ async function answerFormData(formData: FormData) {
   return data;
 }
 
-export default function AnswerForm() {
+export default function AnswerForm({post_id}) {
   const [formData, setFormData] = createSignal<FormData>();
   const [errors, setErrors] = createSignal();
   const [response] = createResource(formData, answerFormData);
@@ -19,6 +19,7 @@ export default function AnswerForm() {
     e.preventDefault();
     setErrors(null);
     const data = new FormData(e.currentTarget as HTMLFormElement);
+    data.append("post_id", post_id)
     const result = answerSchema.safeParse(data);
     console.log(result);
     if (!result.success) {
@@ -37,7 +38,7 @@ export default function AnswerForm() {
           <label class="selector-label" for="question">
             Respond to the Question: 
           </label>
-          <input type="text" id="answer" name="answer">
+          <input type="text" id="answer_content" name="answer_content">
             {" "}
           </input>
         </div>

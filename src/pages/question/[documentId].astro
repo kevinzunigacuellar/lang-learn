@@ -23,7 +23,7 @@ const post = await prisma.posts.findFirst({
         </span>
         <p>{post?.question}</p>
       </article>
-      <AnswerForm client:load />
+      <AnswerForm post_id={id} client:load />
 
 
 
