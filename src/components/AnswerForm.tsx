@@ -1,8 +1,8 @@
 import { Suspense, createSignal, createResource, Show } from "solid-js";
-import { responseSchema } from "../lib/schemas";
+import { answerSchema } from "../lib/schemas";
 
-async function responseFormData(formData: FormData) {
-  const response = await fetch("/api/response", {
+async function answerFormData(formData: FormData) {
+  const response = await fetch("/api/answer", {
     method: "POST",
     body: formData,
   });
@@ -10,16 +10,17 @@ async function responseFormData(formData: FormData) {
   return data;
 }
 
-export default function ResponseForm() {
+export default function AnswerForm() {
   const [formData, setFormData] = createSignal<FormData>();
   const [errors, setErrors] = createSignal();
-  const [response] = createResource(formData, responseFormData);
+  const [response] = createResource(formData, answerFormData);
 
   function submit(e: SubmitEvent) {
     e.preventDefault();
     setErrors(null);
     const data = new FormData(e.currentTarget as HTMLFormElement);
-    const result = responseSchema.safeParse(data);
+    const result = answerSchema.safeParse(data);
+    console.log(result);
     if (!result.success) {
       const errors = result.error.flatten();
       setErrors(errors);
@@ -27,15 +28,16 @@ export default function ResponseForm() {
     }
     setFormData(data);
   }
+  
 
   return (
     <form onSubmit={submit}>
       <div class="flex-container">
         <div class="input">
-          <label class="selector-label" for="quesion">
-            Response to the Question:
+          <label class="selector-label" for="question">
+            Respond to the Question: 
           </label>
-          <input type="text" id="question" name="question">
+          <input type="text" id="answer" name="answer">
             {" "}
           </input>
         </div>

@@ -32,7 +32,7 @@ export default function PostForm() {
     <form onSubmit={submit}>
       <div class="flex-container">
         <div class="input">
-          <label class="selector-label" for="quesion">
+          <label class="selector-label" for="question">
             Create a Question:
           </label>
           <input type="text" id="question" name="question">

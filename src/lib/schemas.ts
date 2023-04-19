@@ -9,7 +9,7 @@ export const postSchema = zfd.formData({
 });
 
 /* todo maybe more checks? idk */
-export const responseSchema = zfd.formData({
+export const answerSchema = zfd.formData({
   response_content: zfd.text(z.string().min(5).max(255)),
   post_id: zfd.text(z.string().min(5).max(255))
 });

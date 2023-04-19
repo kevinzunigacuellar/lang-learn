@@ -1,6 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import ResponseForm from "../../components/ResponseForm";
+import AnswerForm from "../../components/AnswerForm";
 import prisma from "../../lib/prisma";
 
 // get user post information via dynamic routing of the username in the url
@@ -23,8 +23,7 @@ const post = await prisma.posts.findFirst({
         </span>
         <p>{post?.question}</p>
       </article>
-
-      <ResponseForm client:load />
+      <AnswerForm client:load />
 
 
 

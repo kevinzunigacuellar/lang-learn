@@ -1,13 +1,13 @@
 import type { APIRoute, AstroGlobal } from "astro";
-import { responseSchema } from "../../lib/schemas";
+import { answerSchema } from "../../lib/schemas";
 import prisma from "../../lib/prisma";
 import { getUserIdFromCookie } from "../../lib/utils";
 
 export const respond: APIRoute = async ({ request, cookies }) => {
-    const responseData = await request.formData();
-    console.log(responseData);
-    const result = responseSchema.safeParse(responseData);
-  
+    const answerData = await request.formData();
+    const result = answerSchema.safeParse(answerData);
+    console.log(answerData)
+    
     if (!result.success) {
       return new Response(
         JSON.stringify({
@@ -17,7 +17,7 @@ export const respond: APIRoute = async ({ request, cookies }) => {
       );
     }
 
-    const { response_content, post_id } = result.data;
+    const { post_id, response_content } = result.data;
 
     // console.log(getUserIdFromCookie(document.cookie))
     const session_cookie = cookies.get("session")
