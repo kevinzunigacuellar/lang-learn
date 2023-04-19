@@ -4,7 +4,8 @@ import ResponseForm from "../../components/ResponseForm";
 import prisma from "../../lib/prisma";
 
 // get user post information via dynamic routing of the username in the url
-const id = Astro.params.id;
+const id = Astro.params.documentId;
+// const id = Astro.params.id;
 const post = await prisma.posts.findFirst({
   where: {
     post_id: id
