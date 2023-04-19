@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useMemo } from "react";
 
+// List of questions creates the feed of questions on the home page
 const ListOfQuestions = ({ posts: dbposts }) => {
   const [posts, setPosts] = useState(dbposts);
   const [activeLanguage, setActiveLanguage] = useState("All");
@@ -9,12 +10,14 @@ const ListOfQuestions = ({ posts: dbposts }) => {
     [dbposts]
   ) as string[];
 
+  // Filter the posts by language depending on the language selected in the sidebar
   const handleLanguageChange = (language) => {
     setActiveLanguage(language);
     if (language === "All") return setPosts(dbposts);
     setPosts(dbposts.filter((post) => post.post_language === language));
   };
 
+  // The HTML for the list of questions
   return (
     <div className="grid grid-cols-4 gap-4">
       <ul className="hidden sm:block">
@@ -33,6 +36,7 @@ const ListOfQuestions = ({ posts: dbposts }) => {
           ))}
         </div>
       </ul>
+      {/* the map function is like a for loop in astro that will create Question components for each post in the database */}
       <div className="col-span-full sm:col-span-3 grid grid-cols-1 gap-3">
         {posts.map((post) => (
           <Question post={post} key={post.post_id} />
@@ -42,7 +46,9 @@ const ListOfQuestions = ({ posts: dbposts }) => {
   );
 };
 
+// The HTML for each question
 function Question({ post }) {
+  // Link created leads the user to the question page when it is clicked and then post_id is in the URL
   let link = "/question/" + post.post_id;
   return (
     <a href={link}>
