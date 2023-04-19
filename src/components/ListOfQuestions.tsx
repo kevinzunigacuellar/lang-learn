@@ -43,13 +43,16 @@ const ListOfQuestions = ({ posts: dbposts }) => {
 };
 
 function Question({ post }) {
+  let link = "/response/" + post.post_id;
   return (
-    <article className="flex flex-col gap-2 p-6 border items-baseline rounded-md">
+    <a href={link}>
+    <article href={link} className="flex flex-col gap-2 p-6 border items-baseline rounded-md">
       <span className="inline-block px-2 bg-blue-200 text-xs uppercase font-medium text-blue-800 rounded-md">
         {post.post_language}
       </span>
       <p>{post.question}</p>
     </article>
+    </a>
   );
 }
 
