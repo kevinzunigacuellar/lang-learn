@@ -86,6 +86,7 @@ export default function PostForm() {
       <button type="submit" class="btn-97">
         Post
       </button>
+      </div>
     </form>
   );
 }
