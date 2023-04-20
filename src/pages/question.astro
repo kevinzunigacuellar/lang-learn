@@ -21,14 +21,29 @@ try {
 
 ---
 
+
 <Layout title="Ask a question!">
   <main>
-    <h1>Create a Question:</h1>
-    <PostForm client:load />
+    <h1 class="font-4xl text-3xl font-bold mt-4 text-purple-600">Create a Question</h1>
+    <p class="instructions">
+      <strong>Instructions:</strong> Create a question that other users can relate to that will also help them learn the language? <br />
+    </p>
+    <div class="post-form-container">
+      <PostForm client:load />
+    </div>
   </main>
 </Layout>
 
 <style>
+  .post-form-container {
+  background-color: white;
+  border: 2px solid rgba(var(--accent), 25%);
+  padding: 1rem;
+  border-radius: 0.4rem;
+  max-width: 800px; 
+  margin: 2rem auto;
+}
+
   .flex-container {
     display: flex;
     flex-wrap: nowrap;
@@ -38,6 +53,7 @@ try {
   }
 
   .selection-box {
+    text-align: center;
     display: flex;
     flex-direction: column;
     width: 30%;
@@ -63,4 +79,51 @@ try {
     position: relative;
     top: 1px;
   }
+
+
+  button {
+    border: 1px solid black;
+    margin: 5px;
+    padding: 5px;
+  }
+  .button-container {
+    position: fixed;
+    top: 400px;
+    right: 20px;
+  }
+  .content-container {
+    margin-top: 50px; 
+  }
+  .instructions {
+  line-height: 1.6;
+  margin: 1rem auto;
+  border: 2px solid rgba(var(--accent), 25%);
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.4rem;
+  max-width: 800px; 
+}
+
+
+.instructions code {
+  font-size: 0.875em;
+  font-weight: bold;
+  background: rgba(var(--accent), 12%);
+  color: rgb(var(--accent));
+  border-radius: 4px;
+  padding: 0.3em 0.45em;
+  max-width: 90%; 
+}
+
+  .instructions strong {
+    color: rgb(var(--accent));
+  }
+  .font-4xl {
+  text-align: center;
+  margin-top:50px;
+}
+
+.instructions {
+  text-align: center;
+}
 </style>

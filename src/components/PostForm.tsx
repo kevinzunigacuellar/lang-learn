@@ -1,5 +1,7 @@
 import { Suspense, createSignal, createResource, Show } from "solid-js";
 import { postSchema } from "../lib/schemas";
+import "./post-form.css"
+import "./style.css"
 
 async function postFormData(formData: FormData) {
   const response = await fetch("/api/posts", {
@@ -28,6 +30,7 @@ export default function PostForm() {
       console.log(errors);
     }
     setFormData(data);
+    window.location.href = "/..";
   }
 
   return (
@@ -42,6 +45,8 @@ export default function PostForm() {
           </input>
         </div>
 
+
+      <div class="flex-container">
         <div class="selection-box">
           <label class="selector-label" for="difficulty">
             Choose a difficulty:
@@ -58,7 +63,7 @@ export default function PostForm() {
           <label class="selector-label" for="topic">
             Choose a topic:
           </label>
-          <select name="topic" id="topic">
+          <select class="selection" name="topic" id="topic">
             <option value="Select">Select an Option</option>
             <option value="Politics">Politics</option>
             <option value="DailyLife">Daily Life</option>
@@ -70,7 +75,7 @@ export default function PostForm() {
           <label class="selector-label" for="language">
             Choose a langauge:
           </label>
-          <select name="language" id="language">
+          <select class="selection" name="language" id="language">
             <option value="Select">Select an Option</option>
             <option value="Spanish">Spanish</option>
             <option value="French">French</option>
@@ -78,7 +83,7 @@ export default function PostForm() {
           </select>
         </div>
       </div>
-      <button type="submit" class="post-button">
+      <button type="submit" class="btn-97">
         Post
       </button>
     </form>
