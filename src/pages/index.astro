@@ -1,9 +1,9 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import NewQButton from "../components/NewQButton.astro";
-import ListOfQuestions from "../components/ListOfQuestions";
-import { auth } from "../lib/firebase/server";
-import prisma from "../lib/prisma";
+import Layout from "@layouts/Layout.astro";
+import NewQButton from "@components/NewQButton.astro";
+import ListOfQuestions from "@components/ListOfQuestions";
+import { getUserIdFromCookie } from "@lib/utils";
+import prisma from "@lib/prisma";
 
 /* Get session cookie */
 const sessionCookie = Astro.cookies.get("session").value;
@@ -11,33 +11,33 @@ if (!sessionCookie) {
   return Astro.redirect("/login");
 }
 /* Verify session cookie and get user */
-let user;
-try {
-  const decodedClaims = await auth.verifySessionCookie(sessionCookie, true);
-  user = await auth.getUser(decodedClaims.uid);
-} catch (error) {
+const userId = await getUserIdFromCookie(sessionCookie);
+
+if (!userId) {
   return Astro.redirect("/login");
 }
 
-// load in posts from database
+/* load posts from db */
 const posts = await prisma.posts.findMany();
 ---
 
 <Layout title="Language Learner">
   <div class="content-container">
-  <main class="max-w-3xl mx-auto px-4">
-    <h1 class="font-4xl text-3xl font-bold mt-4 text-purple-600">Choose a Question</h1>
-    <p class="instructions">
-      <strong>Instructions:</strong> Choose a question that intrests you and submit
-      your response? <br />
-    </p>
-      <div class = "question-container">
+    <main class="max-w-3xl mx-auto px-4">
+      <h1 class="font-4xl text-3xl font-bold mt-4 text-purple-600">
+        Choose a Question
+      </h1>
+      <p class="instructions">
+        <strong>Instructions:</strong> Choose a question that intrests you and submit
+        your response? <br />
+      </p>
+      <div class="question-container">
         <ListOfQuestions posts={posts} client:load />
       </div>
       <div class="button-container">
         <NewQButton href="/NewQButton" />
       </div>
-  </main>
+    </main>
   </div>
 </Layout>
 
@@ -47,7 +47,7 @@ const posts = await prisma.posts.findMany();
     border: 2px solid rgba(var(--accent), 25%);
     padding: 2rem;
     border-radius: 0.4rem;
-    max-width: 800px; 
+    max-width: 800px;
     margin: 2rem auto;
   }
   button {
@@ -61,18 +61,18 @@ const posts = await prisma.posts.findMany();
     right: 70px;
   }
   .content-container {
-    margin-top: 50px; 
+    margin-top: 50px;
     text-align: center;
   }
   .instructions {
-  line-height: 1.6;
-  margin: 1rem auto;
-  border: 2px solid rgba(var(--accent), 25%);
-  background-color: white;
-  padding: 1rem;
-  border-radius: 0.4rem;
-  max-width: 800px; 
-}
+    line-height: 1.6;
+    margin: 1rem auto;
+    border: 2px solid rgba(var(--accent), 25%);
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.4rem;
+    max-width: 800px;
+  }
   .instructions code {
     font-size: 0.875em;
     font-weight: bold;
