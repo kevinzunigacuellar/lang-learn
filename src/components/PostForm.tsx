@@ -6,8 +6,10 @@ async function postFormData(formData: FormData) {
     method: "POST",
     body: formData,
   });
-  const data = await response.json();
-  return data;
+   
+  if (response.redirected){
+    window.location.assign(response.url);
+  }
 }
 
 export default function PostForm() {
