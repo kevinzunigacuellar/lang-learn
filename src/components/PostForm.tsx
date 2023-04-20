@@ -8,8 +8,10 @@ async function postFormData(formData: FormData) {
     method: "POST",
     body: formData,
   });
-  const data = await response.json();
-  return data;
+   
+  if (response.redirected){
+    window.location.assign(response.url);
+  }
 }
 
 export default function PostForm() {
@@ -34,11 +36,15 @@ export default function PostForm() {
   return (
     <form onSubmit={submit}>
       <div class="flex-container">
-        <label class="selector-label" for="quesion">
-          Type a Question:
-        </label>
-        <input type="text" id="question" name="question" />
-      </div>
+        <div class="input">
+          <label class="selector-label" for="question">
+            Create a Question:
+          </label>
+          <input type="text" id="question" name="question">
+            {" "}
+          </input>
+        </div>
+
 
       <div class="flex-container">
         <div class="selection-box">
@@ -80,6 +86,7 @@ export default function PostForm() {
       <button type="submit" class="btn-97">
         Post
       </button>
+      </div>
     </form>
   );
 }

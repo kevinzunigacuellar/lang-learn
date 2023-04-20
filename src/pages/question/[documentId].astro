@@ -1,5 +1,31 @@
 ---
+import Layout from "../../layouts/Layout.astro";
+import AnswerForm from "../../components/AnswerForm";
+import prisma from "../../lib/prisma";
 
+// get user post information via dynamic routing of the username in the url
+const id = Astro.params.documentId;
+// const id = Astro.params.id;
+const post = await prisma.posts.findFirst({
+  where: {
+    post_id: id
+  }
+});
 ---
-<!-- This is the question page. Get the post id from the url and 
-get the post from the database. Then display the post. -->
+<Layout title="Answer Question">
+<main>
+    This is the question page. Get the post id from the url and 
+    get the post from the database. Then display the post.
+
+    <article class="flex flex-col gap-2 p-6 border items-baseline rounded-md">
+        <span class="inline-block px-2 bg-blue-200 text-xs uppercase font-medium text-blue-800 rounded-md">
+          {post?.post_language}
+        </span>
+        <p>{post?.question}</p>
+      </article>
+      <AnswerForm post_id={id} client:load />
+
+
+
+</main>
+</Layout>

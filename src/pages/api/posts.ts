@@ -1,10 +1,12 @@
 import type { APIRoute } from "astro";
 import { postSchema } from "../../lib/schemas";
 import prisma from "../../lib/prisma";
+import { getUserIdFromCookie } from "../../lib/utils";
 
-export const post: APIRoute = async ({ request }) => {
+export const post: APIRoute = async ({ request, cookies, redirect }) => {
   const postData = await request.formData();
-  console.log(postData);
+  // console.log(postData);
+
   const result = postSchema.safeParse(postData);
 
   if (!result.success) {
@@ -18,11 +20,21 @@ export const post: APIRoute = async ({ request }) => {
 
   // gather post data
   const { question, difficulty, topic, language } = result.data;
-  const user = prisma.user.findUnique({
-    where: {
-      id: "0",
-    },
-  });
+
+  /* get user */
+  const session_cookie = cookies.get("session").value;
+  if (!session_cookie) {
+    return new Response();
+  }
+  const user = await getUserIdFromCookie(session_cookie);
+  if (!user) {
+    return new Response(
+      JSON.stringify({
+        errors: "User not found",
+      }),
+      { status: 400 }
+    );
+  }
 
   // send data to db
   await prisma.posts.create({
@@ -30,14 +42,10 @@ export const post: APIRoute = async ({ request }) => {
       question: question,
       post_language: language,
       has_response: false,
-      user_id: "cleyl3tpx0000o7uo25vuq383",
+      user_id: user,
     },
   });
 
-  return new Response(
-    JSON.stringify({
-      message: "Successfully created post & saved to DB",
-    }),
-    { status: 200 }
-  );
+  // redirect to home page
+  return redirect("/", 301);
 };

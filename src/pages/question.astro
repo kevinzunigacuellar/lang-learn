@@ -1,8 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import PostForm from "../components/PostForm";
-
-
 import { auth } from "../lib/firebase/server";
 
 
@@ -13,12 +11,14 @@ if (!sessionCookie) {
 }
 /* Verify session cookie and get user */
 let user;
+
 try {
   const decodedClaims = await auth.verifySessionCookie(sessionCookie, true);
   user = await auth.getUser(decodedClaims.uid);
 } catch (error) {
   return Astro.redirect("/login");
 }
+
 ---
 
 

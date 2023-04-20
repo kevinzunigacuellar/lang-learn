@@ -8,6 +8,12 @@ export const postSchema = zfd.formData({
   language: zfd.text(z.enum(["Spanish", "French", "English"])),
 });
 
+/* todo maybe more checks? idk */
+export const answerSchema = zfd.formData({
+  answer_content: zfd.text(z.string().min(0).max(255)),
+  post_id: zfd.text(z.string().min(5).max(255))
+});
+
 const userPasswordSchema = z.object({
   email: zfd.text(z.string().email()),
   password: zfd.text(
