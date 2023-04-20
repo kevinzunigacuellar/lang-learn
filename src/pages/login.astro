@@ -1,18 +1,13 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import LoginForm from "../components/LoginForm";
-import { auth } from "../lib/firebase/server";
-/* Get session cookie */
+import Layout from "@layouts/Layout.astro";
+import LoginForm from "@components/LoginForm";
+import { getUserIdFromCookie } from "@lib/utils";
+
+/* Verify if user is logged in */
 const sessionCookie = Astro.cookies.get("session").value;
-if (sessionCookie) {
-  const session = await auth
-    .verifySessionCookie(sessionCookie, true)
-    .catch((error) => {
-      return undefined;
-    });
-  if (session) {
-    return Astro.redirect("/");
-  }
+const user = await getUserIdFromCookie(sessionCookie ?? "");
+if (user) {
+  Astro.redirect("/dashboard");
 }
 ---
 
@@ -22,8 +17,9 @@ if (sessionCookie) {
       <h1 class="font-semibold text-2xl text-black w-full mb-1">Sign in</h1>
       <LoginForm client:load />
       <p class="text-zinc-400 text-sm mb-8 w-full">
-        New to Language Learner? <a href="/signup" class="text-blue-400 font-medium"
-          >Sign up for an account</a
+        New to Language Learner? <a
+          href="/signup"
+          class="text-blue-400 font-medium">Sign up for an account</a
         >
       </p>
     </section>
