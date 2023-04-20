@@ -1,7 +1,7 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import { auth } from "../lib/firebase/server";
-import prisma from "../lib/prisma"
+import Layout from "@layouts/Layout.astro";
+import prisma from "@lib/prisma";
+import { getUserIdFromCookie } from "@lib/utils";
 
 /* Get session cookie */
 const sessionCookie = Astro.cookies.get("session").value;
@@ -9,32 +9,31 @@ if (!sessionCookie) {
   return Astro.redirect("/login");
 }
 /* Verify session cookie and get user */
-let user;
-try {
-  const decodedClaims = await auth.verifySessionCookie(sessionCookie, true);
-  user = await auth.getUser(decodedClaims.uid);
-} catch (error) {
+const user = await getUserIdFromCookie(sessionCookie);
+
+if (!user) {
   return Astro.redirect("/login");
 }
 /* find my posts */
-const myPosts = await prisma.posts.findMany({
+const postsFromDB = await prisma.posts.findMany({
   where: {
-    user_id: user.uid
-  }
-})
+    user_id: user,
+  },
+  select: {
+    question: true,
+    post_id: true,
+    has_response: true,
+    post_language: true,
+  },
+});
+
+/* TODO: find my responses */
 ---
 
 <Layout title="Inbox">
   <main>
     <h1>Inbox</h1>
-    <ul>
-      {myPosts.map((post) => (
-        <li class="p-4 border">
-          <p>{post.question}</p>
-          <p>{post.post_language}</p>
-          </li>
-      ))}
-      </ul>
+    <pre>{JSON.stringify(postsFromDB, null, 2)}</pre>
   </main>
 </Layout>
 
@@ -75,7 +74,6 @@ const myPosts = await prisma.posts.findMany({
     top: 1px;
   }
 
-
   button {
     border: 1px solid black;
     margin: 5px;
@@ -87,39 +85,37 @@ const myPosts = await prisma.posts.findMany({
     right: 20px;
   }
   .content-container {
-    margin-top: 50px; 
+    margin-top: 50px;
   }
   .instructions {
-  line-height: 1.6;
-  margin: 1rem auto;
-  border: 2px solid rgba(var(--accent), 25%);
-  background-color: white;
-  padding: 1rem;
-  border-radius: 0.4rem;
-  max-width: 800px; 
-}
+    line-height: 1.6;
+    margin: 1rem auto;
+    border: 2px solid rgba(var(--accent), 25%);
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.4rem;
+    max-width: 800px;
+  }
 
-
-
-.instructions code {
-  font-size: 0.875em;
-  font-weight: bold;
-  background: rgba(var(--accent), 12%);
-  color: rgb(var(--accent));
-  border-radius: 4px;
-  padding: 0.3em 0.45em;
-  max-width: 90%; 
-}
+  .instructions code {
+    font-size: 0.875em;
+    font-weight: bold;
+    background: rgba(var(--accent), 12%);
+    color: rgb(var(--accent));
+    border-radius: 4px;
+    padding: 0.3em 0.45em;
+    max-width: 90%;
+  }
 
   .instructions strong {
     color: rgb(var(--accent));
   }
   .font-4xl {
-  text-align: center;
-  margin-top:50px;
-}
+    text-align: center;
+    margin-top: 50px;
+  }
 
-.instructions {
-  text-align: center;
-}
+  .instructions {
+    text-align: center;
+  }
 </style>
