@@ -1,8 +1,7 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import PostForm from "../components/PostForm";
-import { auth } from "../lib/firebase/server";
-
+import Layout from "@layouts/Layout.astro";
+import PostForm from "@components/PostForm";
+import { getUserIdFromCookie } from "@lib/utils";
 
 /* Get session cookie */
 const sessionCookie = Astro.cookies.get("session").value;
@@ -10,23 +9,21 @@ if (!sessionCookie) {
   return Astro.redirect("/login");
 }
 /* Verify session cookie and get user */
-let user;
+const user = await getUserIdFromCookie(sessionCookie);
 
-try {
-  const decodedClaims = await auth.verifySessionCookie(sessionCookie, true);
-  user = await auth.getUser(decodedClaims.uid);
-} catch (error) {
+if (!user) {
   return Astro.redirect("/login");
 }
-
 ---
-
 
 <Layout title="Ask a question!">
   <main>
-    <h1 class="font-4xl text-3xl font-bold mt-4 text-purple-600">Create a Question</h1>
+    <h1 class="font-4xl text-3xl font-bold mt-4 text-purple-600">
+      Create a Question
+    </h1>
     <p class="instructions">
-      <strong>Instructions:</strong> Create a question that other users can relate to that will also help them learn the language? <br />
+      <strong>Instructions:</strong> Create a question that other users can relate
+      to that will also help them learn the language? <br />
     </p>
     <div class="post-form-container">
       <PostForm client:load />
@@ -36,13 +33,13 @@ try {
 
 <style>
   .post-form-container {
-  background-color: white;
-  border: 2px solid rgba(var(--accent), 25%);
-  padding: 1rem;
-  border-radius: 0.4rem;
-  max-width: 800px; 
-  margin: 2rem auto;
-}
+    background-color: white;
+    border: 2px solid rgba(var(--accent), 25%);
+    padding: 1rem;
+    border-radius: 0.4rem;
+    max-width: 800px;
+    margin: 2rem auto;
+  }
 
   .flex-container {
     display: flex;
@@ -80,7 +77,6 @@ try {
     top: 1px;
   }
 
-
   button {
     border: 1px solid black;
     margin: 5px;
@@ -92,38 +88,37 @@ try {
     right: 20px;
   }
   .content-container {
-    margin-top: 50px; 
+    margin-top: 50px;
   }
   .instructions {
-  line-height: 1.6;
-  margin: 1rem auto;
-  border: 2px solid rgba(var(--accent), 25%);
-  background-color: white;
-  padding: 1rem;
-  border-radius: 0.4rem;
-  max-width: 800px; 
-}
+    line-height: 1.6;
+    margin: 1rem auto;
+    border: 2px solid rgba(var(--accent), 25%);
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.4rem;
+    max-width: 800px;
+  }
 
-
-.instructions code {
-  font-size: 0.875em;
-  font-weight: bold;
-  background: rgba(var(--accent), 12%);
-  color: rgb(var(--accent));
-  border-radius: 4px;
-  padding: 0.3em 0.45em;
-  max-width: 90%; 
-}
+  .instructions code {
+    font-size: 0.875em;
+    font-weight: bold;
+    background: rgba(var(--accent), 12%);
+    color: rgb(var(--accent));
+    border-radius: 4px;
+    padding: 0.3em 0.45em;
+    max-width: 90%;
+  }
 
   .instructions strong {
     color: rgb(var(--accent));
   }
   .font-4xl {
-  text-align: center;
-  margin-top:50px;
-}
+    text-align: center;
+    margin-top: 50px;
+  }
 
-.instructions {
-  text-align: center;
-}
+  .instructions {
+    text-align: center;
+  }
 </style>
