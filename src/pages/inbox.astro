@@ -48,15 +48,13 @@ const postsFromDB = await prisma.posts.findMany({
               <span class="inline-block px-2 bg-blue-200 text-xs uppercase font-medium text-blue-800 rounded-md">
                 {post?.post_language}
               </span>
-              <p>{post?.question}</p>
+              <p class="text-center">{post?.question}</p>
             </article>
           ))}
         </div>
-
         
       </main>
     </div>
-        
     </div>
   </main>
 </Layout>
@@ -69,6 +67,7 @@ const postsFromDB = await prisma.posts.findMany({
     border-radius: 0.4rem;
     max-width: 800px;
     margin: 2rem auto;
+    
   }
   .flex-container {
     display: flex;
