@@ -2,6 +2,7 @@
 import Layout from "@layouts/Layout.astro";
 import prisma from "@lib/prisma";
 import { getUserIdFromCookie } from "@lib/utils";
+import "../components/style.css";
 
 /* Get session cookie */
 const sessionCookie = Astro.cookies.get("session").value;
@@ -32,12 +33,43 @@ const postsFromDB = await prisma.posts.findMany({
 
 <Layout title="Inbox">
   <main>
-    <h1>Inbox</h1>
-    <pre>{JSON.stringify(postsFromDB, null, 2)}</pre>
+    <div class="content-container">
+      <main class="max-w-3xl mx-auto px-4">
+        <h1 class="font-4xl text-3xl font-bold mt-4 text-purple-600">
+          View your Questions
+        </h1>
+        <p class="instructions">
+          <strong>Instructions:</strong> Choose a question from your inbox? <br />
+        </p>
+
+        <div class="question-container">  
+          {postsFromDB.map(post => (
+            <article class="flex flex-col gap-2 p-6 border items-baseline rounded-md">
+              <span class="inline-block px-2 bg-blue-200 text-xs uppercase font-medium text-blue-800 rounded-md">
+                {post?.post_language}
+              </span>
+              <p>{post?.question}</p>
+            </article>
+          ))}
+        </div>
+
+        
+      </main>
+    </div>
+        
+    </div>
   </main>
 </Layout>
 
 <style>
+  .question-container {
+    background-color: white;
+    border: 2px solid rgba(var(--accent), 25%);
+    padding: 2rem;
+    border-radius: 0.4rem;
+    max-width: 800px;
+    margin: 2rem auto;
+  }
   .flex-container {
     display: flex;
     flex-wrap: nowrap;
