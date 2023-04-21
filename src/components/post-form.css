@@ -1,8 +1,11 @@
 form {
+    align-items: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
     margin-top: 50px;
+  }
+  label {
+    font-weight: bold;
   }
   
   .flex-container {
@@ -80,4 +83,3 @@ form {
   .post-button:hover {
     background-color:rgb(var(--accent));;
   }
-  
