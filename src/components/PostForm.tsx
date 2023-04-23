@@ -36,17 +36,13 @@ export default function PostForm() {
   return (
     <form onSubmit={submit}>
       <div class="flex-container">
-        <div class="input">
-          <label class="selector-label" for="question">
-            Create a Question:
-          </label>
+          <label class="selector-label" for="question">Create a Question:</label>
           <input type="text" id="question" name="question">
             {" "}
           </input>
-        </div>
 
 
-      <div class="flex-container">
+      
         <div class="selection-box">
           <label class="selector-label" for="difficulty">
             Choose a difficulty:
@@ -81,11 +77,10 @@ export default function PostForm() {
             <option value="French">French</option>
             <option value="English">English</option>
           </select>
-        </div>
+          </div>
       </div>
-      <button type="submit" class="btn-97">
-        Post
-      </button>
+      <div class = "btn-container">
+        <button class="btn-97">Post</button>
       </div>
     </form>
   );

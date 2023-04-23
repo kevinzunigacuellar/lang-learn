@@ -1,5 +1,6 @@
 import { Suspense, createSignal, createResource, Show } from "solid-js";
 import { answerSchema } from "../lib/schemas";
+import "./style.css"
 
 async function answerFormData(formData: FormData) {
   const response = await fetch("/api/answer", {
@@ -34,18 +35,23 @@ export default function AnswerForm({post_id}) {
   return (
     <form onSubmit={submit}>
       <div class="flex-container">
-        <div class="input">
+        <div class="input p-4">
           <label class="selector-label" for="question">
             Respond to the Question: 
           </label>
-          <input type="text" id="answer_content" name="answer_content">
-            {" "}
-          </input>
+          <textarea
+            id="answer_content"
+            name="answer_content"
+            rows={6}
+            class="block w-full mt-1 rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
+          />
         </div>
       </div>
-      <button type="submit" class="post-button">
-        Post
-      </button>
+      <div class="text-center" style="display: flex; justify-content: center;">
+        <button type="submit" class="btn-97">
+          Post
+        </button>
+      </div>
     </form>
   );
 }

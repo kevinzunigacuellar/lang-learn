@@ -55,27 +55,61 @@
       }
     </style>
     <script>
+
 var i = 0;
 var titles = ["¡Hola!", "你好!", "Bonjour! "]; 
 
 // Execute first iteration immediately
 var title = titles[i];
-document.getElementById("title").innerHTML = title;
+var elementById = document.getElementById("title");
+if (elementById) {
+  elementById.innerHTML = title;
+}
+else {
+  console.log("Error changing title");
+}
 var displayedTitle = document.getElementById("displayedTitle");
-displayedTitle.innerHTML = title;
-displayedTitle.classList.add("slide-in", "fade-in");
+if (displayedTitle) {
+  displayedTitle.innerHTML = title;
+  displayedTitle.classList.add("slide-in", "fade-in");
+}
+else {
+  console.log("Error changing displayed title");
+}
+
 i = (i + 1) % titles.length;
 
 // Execute subsequent iterations every 6 seconds
 setInterval(function(){
   var title = titles[i];
-  document.getElementById("title").innerHTML = title;
-  displayedTitle.classList.remove("fade-in");
-  displayedTitle.classList.add("fade-out");
+  var elementById = document.getElementById("title");
+
+  if (elementById) {
+  elementById.innerHTML = title;
+  }
+  else {
+    console.log("Error changing title");
+  }
+  var displayedTitle = document.getElementById("displayedTitle");
+  if (displayedTitle) {
+    displayedTitle.innerHTML = title;
+    displayedTitle.classList.remove("fade-in");
+    displayedTitle.classList.add("fade-out");
+  }
+  else {
+    console.log("Error changing displayed title");
+  }
+  
+  
   setTimeout(function() {
+    if (displayedTitle) {
     displayedTitle.innerHTML = title;
     displayedTitle.classList.remove("fade-out");
     displayedTitle.classList.add("slide-in", "fade-in");
+    }
+    else {
+      console.log("Error changing displayed title");
+    }
   }, 500); 
   i = (i + 1) % titles.length;
 }, 6000); 

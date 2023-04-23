@@ -3,6 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import AnswerForm from "../../components/AnswerForm";
 import prisma from "../../lib/prisma";
 
+
 // get user post information via dynamic routing of the username in the url
 const id = Astro.params.documentId;
 // const id = Astro.params.id;
@@ -12,20 +13,71 @@ const post = await prisma.posts.findFirst({
   }
 });
 ---
-<Layout title="Answer Question">
-<main>
-    This is the question page. Get the post id from the url and 
-    get the post from the database. Then display the post.
-
-    <article class="flex flex-col gap-2 p-6 border items-baseline rounded-md">
-        <span class="inline-block px-2 bg-blue-200 text-xs uppercase font-medium text-blue-800 rounded-md">
-          {post?.post_language}
-        </span>
-        <p>{post?.question}</p>
-      </article>
-      <AnswerForm post_id={id} client:load />
-
-
-
-</main>
+<Layout title="Language Learner">
+  <div class="content-container">
+    <main class="max-w-3xl mx-auto px-4">
+      <h1 class="font-4xl text-3xl font-bold mt-4 text-purple-600">
+        Respond to a Question
+      </h1>
+      <p class="instructions">
+        <strong>Instructions:</strong> Choose a question that intrests you and submit
+        your response? <br />
+      </p>
+      
+      <div class="question-container">
+        <article class="flex flex-col gap-2 p-6 border items-baseline rounded-md">
+            <span class="inline-block px-2 bg-blue-200 text-xs uppercase font-medium text-blue-800 rounded-md">
+              {post?.post_language}
+            </span>
+            <p>{post?.question}</p>
+          </article>
+          <AnswerForm post_id={id} client:load />
+      </div>
+    </main>
+  </div>
 </Layout>
+
+<style>
+  .question-container {
+    background-color: white;
+    border: 2px solid rgba(var(--accent), 25%);
+    padding: 2rem;
+    border-radius: 0.4rem;
+    max-width: 800px;
+    margin: 2rem auto;
+  }
+  button {
+    border: 1px solid black;
+    margin: 5px;
+    padding: 5px;
+  }
+  .button-container {
+    position: fixed;
+    top: 400px;
+    right: 70px;
+  }
+  .content-container {
+    margin-top: 50px;
+    text-align: center;
+  }
+  .instructions {
+    line-height: 1.6;
+    margin: 1rem auto;
+    border: 2px solid rgba(var(--accent), 25%);
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.4rem;
+    max-width: 800px;
+  }
+  .instructions code {
+    font-size: 0.875em;
+    font-weight: bold;
+    background: rgba(var(--accent), 12%);
+    color: rgb(var(--accent));
+    border-radius: 4px;
+    padding: 0.3em 0.45em;
+  }
+  .instructions strong {
+    color: rgb(var(--accent));
+  }
+</style>
