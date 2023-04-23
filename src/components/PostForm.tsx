@@ -3,6 +3,7 @@ import { postSchema } from "../lib/schemas";
 import "./post-form.css"
 import "./style.css"
 
+// Post form for creating a new question
 async function postFormData(formData: FormData) {
   const response = await fetch("/api/posts", {
     method: "POST",
@@ -14,16 +15,19 @@ async function postFormData(formData: FormData) {
   }
 }
 
+// Form for submitting a new question
 export default function PostForm() {
   const [formData, setFormData] = createSignal<FormData>();
   const [errors, setErrors] = createSignal();
   const [response] = createResource(formData, postFormData);
 
+  // Called to sumbit the form data to the server
   function submit(e: SubmitEvent) {
     e.preventDefault();
     setErrors(null);
     const data = new FormData(e.currentTarget as HTMLFormElement);
-    const result = postSchema.safeParse(data);
+    const result = postSchema.safeParse(data); // Validate the form data using the schema
+    // Handle errors
     if (!result.success) {
       const errors = result.error.flatten();
       setErrors(errors);
@@ -33,6 +37,7 @@ export default function PostForm() {
     window.location.href = "/..";
   }
 
+  // The HTML for the question form
   return (
     <form onSubmit={submit}>
       <div class="flex-container">
