@@ -34,7 +34,7 @@ const postsFromDB = await prisma.posts.findMany({
 <Layout title="Inbox">
   <main>
     <div class="content-container">
-      <main class="max-w-3xl mx-auto px-4">
+      <div class="max-w-3xl mx-auto px-4">
         <h1 class="font-4xl text-3xl font-bold mt-4 text-purple-600">
           View your Questions
         </h1>
@@ -52,10 +52,8 @@ const postsFromDB = await prisma.posts.findMany({
             </article>
           ))}
         </div>
-        
-      </main>
-    </div>
-    </div>
+      </div>
+  </div>
   </main>
 </Layout>
 
