@@ -16,6 +16,7 @@ import {
 } from "firebase/auth";
 import { app } from "@lib/firebase/client";
 import ErrorPlaceholder from "@components/ErrorPlaceholder";
+import Error from "@components/Error";
 import type { z } from "zod";
 
 type Errors = z.typeToFlattenedError<z.inferFormattedError<typeof loginSchema>>;
@@ -135,8 +136,4 @@ export default function LoginForm() {
       </Suspense>
     </form>
   );
-}
-
-function Error({ message }: { message: string | string[] }) {
-  return <p class="-mt-1 text-sm text-red-500">{message}</p>;
 }
