@@ -4,7 +4,7 @@ import prisma from "../../lib/prisma";
 import { getUserIdFromCookie } from "../../lib/utils";
 
 // Updates the database to create a response to a post
-export const post: APIRoute = async ({ request, cookies }) => {
+export const post: APIRoute = async ({ request, cookies, redirect }) => {
     const answerData = await request.formData();
     const result = answerSchema.safeParse(answerData); // validate data
     
@@ -37,11 +37,17 @@ export const post: APIRoute = async ({ request, cookies }) => {
         },
     });
 
+    // Updates the post to show that it has a response
+    await prisma.posts.update({
+        where: {
+            post_id: post_id,
+        },
+        data: {
+            has_response: true,
+        }
+    })
+
+
     // returns a success message
-    return new Response(
-        JSON.stringify({
-          message: "Successfully responded to post & saved to DB",
-        }),
-        { status: 200 }
-      );
+    return redirect("/", 301);
 };

@@ -9,8 +9,10 @@ async function answerFormData(formData: FormData) {
     method: "POST",
     body: formData,
   });
-  const data = await response.json();
-  return data;
+
+  if (response.redirected){
+    window.location.assign(response.url);
+  }
 }
 
 // Form for submitting an answer to a question
@@ -35,6 +37,7 @@ export default function AnswerForm({post_id}) { // post_id is passed in from the
       console.log(errors);
     }
     setFormData(data);
+    
   }
   
 
