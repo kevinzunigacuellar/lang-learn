@@ -2,7 +2,6 @@ import { Suspense, createSignal, createResource, Show } from "solid-js";
 import { answerSchema } from "../lib/schemas";
 import "./style.css"
 
-
 // Server request that submits a user's answer to a question
 async function answerFormData(formData: FormData) {
   const response = await fetch("/api/answer", {
