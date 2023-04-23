@@ -1,3 +1,5 @@
+/** @jsxImportSource solid-js */
+
 import {
   createSignal,
   Show,
@@ -6,11 +8,15 @@ import {
   Switch,
   Match,
 } from "solid-js";
-import { loginSchema } from "../lib/schemas";
-import { signInWithEmailAndPassword, inMemoryPersistence, getAuth } from "firebase/auth";
-import { app } from "../lib/firebase/client";
-import ErrorPlaceholder from "./ErrorPlaceholder";
-import Error from "./Error";
+import { loginSchema } from "@lib/schemas";
+import {
+  signInWithEmailAndPassword,
+  inMemoryPersistence,
+  getAuth,
+} from "firebase/auth";
+import { app } from "@lib/firebase/client";
+import ErrorPlaceholder from "@components/ErrorPlaceholder";
+import Error from "@components/Error";
 import type { z } from "zod";
 
 type Errors = z.typeToFlattenedError<z.inferFormattedError<typeof loginSchema>>;
@@ -19,16 +25,14 @@ type SucessForm = z.infer<typeof loginSchema>;
 // takes in the login pages form data and sends it to the server
 async function postFormData(formData: SucessForm) {
   const { email, password } = formData;
-  const auth = getAuth(app)
-  
+  const auth = getAuth(app);
+
   // Set the persistence to browser session
-  const userCredential = await auth.setPersistence(inMemoryPersistence).then(() => signInWithEmailAndPassword(
-    auth,
-    email,
-    password
-  ))
+  const userCredential = await auth
+    .setPersistence(inMemoryPersistence)
+    .then(() => signInWithEmailAndPassword(auth, email, password));
   const idToken = await userCredential.user.getIdToken();
-  
+
   // Runs the login api
   const res = await fetch("/api/login", {
     method: "POST",
@@ -62,6 +66,7 @@ export default function LoginForm() {
 
     // error handling
     if (!result.success) {
+      // @ts-ignore
       const errors = result.error.flatten() as Errors;
       setClientErrors(errors);
       return;
@@ -73,14 +78,14 @@ export default function LoginForm() {
   return (
     <form class="grid grid-cols-1 gap-3 w-full" onSubmit={submit}>
       <div class="grid grid-cols-1 gap-2">
-        <label for="email" class="font-medium text-zinc-300 text-sm">
+        <label for="email" class="font-medium text-sm text-zinc-800">
           Email
         </label>
         <input
           type="text"
           id="email"
           name="email"
-          class="rounded-md py-1 px-3 bg-zinc-800 text-zinc-300 border border-zinc-700 focus:border-pink-500 focus:outline-none focus:ring-2 focus:ring-pink-600 focus:bg-zinc-900 focus:ring-opacity-60"
+          class="rounded-md py-1 px-3 bg-zinc-50 text-zinc-600 border border-zinc-300 focus:border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:bg-white"
         />
         <Show
           when={clientErrors()?.fieldErrors.email}
@@ -90,14 +95,14 @@ export default function LoginForm() {
         </Show>
       </div>
       <div class="grid grid-cols-1 gap-2">
-        <label for="password" class="font-medium text-zinc-300 text-sm">
+        <label for="password" class="font-medium text-sm text-zinc-800">
           Password
         </label>
         <input
           type="password"
           id="password"
           name="password"
-          class="rounded-md py-1 px-3 bg-zinc-800 text-zinc-300 border border-zinc-700 focus:border-pink-500 focus:outline-none focus:ring-2 focus:ring-pink-600 focus:bg-zinc-900 focus:ring-opacity-60"
+          class="rounded-md py-1 px-3 bg-zinc-50 text-zinc-600 border border-zinc-300 focus:border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:bg-white"
         />
         <Show
           when={clientErrors()?.fieldErrors.password}
@@ -107,7 +112,7 @@ export default function LoginForm() {
         </Show>
       </div>
       <button
-        class="bg-zinc-100 py-1.5 border border-zinc-100 rounded-md mt-2 text-black font-medium text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-600 focus:ring-offset-zinc-900 disabled:opacity-50 disabled:cursor-not-allowed"
+        class="bg-pink-500 py-1.5 rounded-md mt-1 text-white font-medium text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-400 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-pink-600"
         type="submit"
         disabled={response.loading}
       >
