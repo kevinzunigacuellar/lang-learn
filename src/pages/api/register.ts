@@ -39,6 +39,7 @@ export const post: APIRoute = async ({ request, redirect }) => {
         username: username,
         email: email,
         target_language: targetLanguage,
+        firebase_id: userData.uid as string,
         id: userData.uid as string,
       },
     });
