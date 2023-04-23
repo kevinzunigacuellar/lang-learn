@@ -3,11 +3,12 @@ import { answerSchema } from "../../lib/schemas";
 import prisma from "../../lib/prisma";
 import { getUserIdFromCookie } from "../../lib/utils";
 
+// Updates the database to create a response to a post
 export const post: APIRoute = async ({ request, cookies }) => {
     const answerData = await request.formData();
-    // answerData.append("post_id", request.);
-    const result = answerSchema.safeParse(answerData);
+    const result = answerSchema.safeParse(answerData); // validate data
     
+    // Error handling
     if (!result.success) {
       return new Response(
         JSON.stringify({
@@ -19,15 +20,14 @@ export const post: APIRoute = async ({ request, cookies }) => {
 
     const { post_id, answer_content } = result.data;
 
-    // console.log(getUserIdFromCookie(document.cookie))
+    // get the user's id to attribute the response to them
     const session_cookie = cookies.get("session")
     if (!session_cookie) {
         return new Response ()
     }
     const user = getUserIdFromCookie(String(session_cookie))
-    console.log(user);
 
-
+    // creates a new entry to the responses table in the database
     await prisma.responses.create({
         data: {
             response_content: answer_content, 
@@ -37,15 +37,11 @@ export const post: APIRoute = async ({ request, cookies }) => {
         },
     });
 
+    // returns a success message
     return new Response(
         JSON.stringify({
           message: "Successfully responded to post & saved to DB",
         }),
         { status: 200 }
       );
-
-
-
-
-
 };

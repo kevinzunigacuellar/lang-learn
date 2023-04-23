@@ -17,6 +17,12 @@ export const answerSchema = zfd.formData({
   post_id: zfd.text(z.string().min(5).max(255))
 });
 
+// validate data sent for adding corrections to a repsonse
+export const correctionSchema = zfd.formData({
+  correction_content: zfd.text(z.string().min(0).max(255)),
+  response_id: zfd.text(z.string().min(5).max(255))
+});
+
 // validate user passwords
 const userPasswordSchema = z.object({
   email: zfd.text(z.string().email()),
