@@ -11,25 +11,25 @@ pnpm: 7
 
 1. Clone the repository
 
-```
+```bash
 git clone "repo_url"
 ```
 
 2. Install dependencies
 
-```
+```bash
 pnpm install
 ```
 
 3. Generate a prisma client
 
-```
+```bash
 pnpm run prisma:generate
 ```
 
 4. Start the development server
 
-```
+```bash
 pnpm run dev
 ```
 
@@ -37,19 +37,19 @@ pnpm run dev
 
 1. Create a new branch
 
-```
+```bash
 git switch -c "branch name"
 ```
 
 2. Make your changes
 
-```
+```bash
 git add "...files"
 git commit -m "commit message"
 ```
 
 3. Push your changes
 
-```
+```bash
 git push -u origin "branch name"
 ```
