@@ -1,4 +1,4 @@
-import type { APIRoute } from "astro";
+import type { APIRoute, AstroGlobal } from "astro";
 import { postSchema } from "../../lib/schemas";
 import prisma from "../../lib/prisma";
 import { getUserIdFromCookie } from "../../lib/utils";

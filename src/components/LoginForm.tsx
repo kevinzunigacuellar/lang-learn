@@ -16,43 +16,51 @@ import type { z } from "zod";
 type Errors = z.typeToFlattenedError<z.inferFormattedError<typeof loginSchema>>;
 type SucessForm = z.infer<typeof loginSchema>;
 
+// takes in the login pages form data and sends it to the server
 async function postFormData(formData: SucessForm) {
   const { email, password } = formData;
   const auth = getAuth(app)
   
-  /* This will set the persistence to browser session */
+  // Set the persistence to browser session
   const userCredential = await auth.setPersistence(inMemoryPersistence).then(() => signInWithEmailAndPassword(
     auth,
     email,
     password
   ))
   const idToken = await userCredential.user.getIdToken();
+  
+  // Runs the login api
   const res = await fetch("/api/login", {
     method: "POST",
     body: JSON.stringify({ idToken }),
   });
 
+  // If the response is not ok, return the error
   if (!res.ok) {
     const data = await res.json();
     return data;
   }
-
+  // If the response is ok, redirect to the home page
   if (res.redirected) {
     window.location.assign(res.url);
   }
 }
 
+// The login form
 export default function LoginForm() {
   const [formData, setFormData] = createSignal<SucessForm>();
   const [response] = createResource(formData, postFormData);
   const [clientErrors, setClientErrors] = createSignal<Errors>();
 
+  // Called when the login form is submitted
   async function submit(e: SubmitEvent) {
     e.preventDefault();
     setClientErrors();
     const data = new FormData(e.currentTarget as HTMLFormElement);
+    // runs the data through the schema to ensure it is valid
     const result = loginSchema.safeParse(data);
 
+    // error handling
     if (!result.success) {
       const errors = result.error.flatten() as Errors;
       setClientErrors(errors);
@@ -61,6 +69,7 @@ export default function LoginForm() {
     setFormData(result.data);
   }
 
+  // The HTML for the login form
   return (
     <form class="grid grid-cols-1 gap-3 w-full" onSubmit={submit}>
       <div class="grid grid-cols-1 gap-2">

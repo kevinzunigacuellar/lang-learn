@@ -1,6 +1,7 @@
 import admin from "firebase-admin";
 import { getAuth } from "firebase-admin/auth";
 
+// A firebase service account isused to authenticate users with the firebase admin sdk
 const serviceAccount = {
     type: "service_account",
     project_id: import.meta.env.FIREBASE_PROJECT_ID,

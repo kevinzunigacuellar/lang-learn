@@ -15,33 +15,39 @@ import {
     z.inferFormattedError<typeof registerSchema>
   >;
   
+  // registers the user for the website
   async function postFormData(formData: FormData) {
     const res = await fetch("/api/register", {
       method: "POST",
       body: formData,
     });
   
+    // error handling
     if (!res.ok) {
       const data = await res.json();
       return data;
     }
   
+    // if the response is ok, redirect to the home page
     if (res.redirected) {
       window.location.assign(res.url);
     }
   }
   
+  // the form for registering as a new user
   export default function SignupForm() {
     const [formData, setFormData] = createSignal<FormData>();
     const [response] = createResource(formData, postFormData);
     const [clientErrors, setClientErrors] = createSignal<Errors>();
   
+    // called when the form is submitted
     async function submit(e: SubmitEvent) {
       e.preventDefault();
       setClientErrors();
       const data = new FormData(e.currentTarget as HTMLFormElement);
       const result = registerSchema.safeParse(data);
   
+      // error handling
       if (!result.success) {
         const errors = result.error.flatten() as Errors;
         setClientErrors(errors);
@@ -50,6 +56,7 @@ import {
       setFormData(data);
     }
   
+    // HTML for the registration form
     return (
       <form class="grid grid-cols-1 gap-3 w-full" onSubmit={submit}>
         <div class="grid grid-cols-1 gap-2">
