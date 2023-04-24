@@ -42,7 +42,7 @@ const post = await prisma.posts.findFirst({
               </article>
 
             <!-- The form to correct the response -->
-            <CorrectionForm post_id={id} client:load />
+            <CorrectionForm response_id={id} client:load />
         </div>
       </main>
     </div>
