@@ -10,10 +10,21 @@ To get started, run the following commands:
 pnpm install
 ```
 
-2. Generate a prisma client:
+2. Add project credentials:
 
-- Create a file called ".env" in the root of the folder
-- Put our secret key in that file (if you ask nicely, maybe we'll tell you)
+- Create a file called ".env" in the root folder with the following contents:
+
+```bash
+# .env
+DATABASE_URL=
+FIREBASE_PROJECT_ID=
+FIREBASE_PRIVATE_KEY_ID=
+FIREBASE_PRIVATE_KEY=
+```
+
+- Replace the values with the credentials provided in the assignment.
+
+3. Generate a prisma client (this creates a client that allows us to interact with the database):
 
 ```bash
 pnpm run prisma:generate
@@ -25,34 +36,3 @@ pnpm run prisma:generate
 pnpm run dev
 ```
 
-## Sprint 2
-
-### Main Goals
- - [x] User Login Flow - The user is sent to a login screen when if they are no logged in. The site uses firebase authenticiation.
- - [ ] Profile Page requests data from database - We were not able to complete this because the authentication wasn't working until very recently. This should not be too difficult to accomplish in sprint 3
- - [x] Home page loads in sample posts from database - once logged in, the posts shown are sample posts from the database
- - [x] Filter sorts posts on the home page - filter is on the left of the homepage
- - [ ] User can make a post - this was not completed because authentication took longer than expected
- - [x] Inbox - click the inbox button in the nav bar to get to this page
-
-
-### Secondary Goals
- - [ ] Plan for the appearance of the final website - we were still changing around so many elements that it didn't make snes eto get tied to an appearence at this stage of production.
-
-
-
-## Sprint 1
-
-### Main Goals
-
-- [x] Create GitLab/GitHub Repo - https://github.com/kevinzunigacuellar/lang-learn
-- [x] Setup Firebase Account - we ended up not using firebase because we found an easier platform to host our database and site. PlanetScale and Vercel
-- [x] Setup a database schema in PlanetScale - veiw prisma/schema.prisma
-- [x] Setup Vercel hosting - https://lang-learn-a35pdonlm-kevinzunigacuellar.vercel.app/
-- [x] Create markup for the dashboard/index page - on our google drive
-- [x] Create a login page - https://lang-learn-a35pdonlm-kevinzunigacuellar.vercel.app/login
-
-### Secondary goals
-
-- [x] Create question asking page - https://lang-learn-a35pdonlm-kevinzunigacuellar.vercel.app/question
-- [ ] Create a profile Page - press profile button or https://lang-learn-a35pdonlm-kevinzunigacuellar.vercel.app/profile

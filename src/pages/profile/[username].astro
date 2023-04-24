@@ -2,8 +2,6 @@
 import Layout from "../../layouts/Layout.astro";
 import prisma from "../../lib/prisma";
 
-// get user profile information via dynamic routing of the username in the url
-// TODO: someday
 /* get the user data from the session */
 const username = Astro.params.username;
 const user = await prisma.user.findFirst({
