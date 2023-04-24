@@ -2,15 +2,16 @@ import { Suspense, createSignal, createResource, Show } from "solid-js";
 import { answerSchema } from "../lib/schemas";
 import "./style.css"
 
-
 // Server request that submits a user's answer to a question
 async function answerFormData(formData: FormData) {
   const response = await fetch("/api/answer", {
     method: "POST",
     body: formData,
   });
-  const data = await response.json();
-  return data;
+
+  if (response.redirected){
+    window.location.assign(response.url);
+  }
 }
 
 // Form for submitting an answer to a question
@@ -35,6 +36,7 @@ export default function AnswerForm({post_id}) { // post_id is passed in from the
       console.log(errors);
     }
     setFormData(data);
+    
   }
   
 

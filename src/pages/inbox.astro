@@ -28,7 +28,23 @@ const postsFromDB = await prisma.posts.findMany({
   },
 });
 
-/* TODO: find my responses */
+/* Find my responses that have comments attached */
+const myResponses = await prisma.responses.findMany({
+  where: {
+    user_id: user,
+    NOT: {
+      response_comment: undefined,
+    },
+  },
+  select: {
+    response_id: true,
+    response_content: true,
+    response_comment: true,
+    post_id: true,
+    post: true,
+  },
+});
+
 ---
 
 <Layout title="Inbox">
@@ -36,12 +52,8 @@ const postsFromDB = await prisma.posts.findMany({
     <div class="content-container">
       <div class="max-w-3xl mx-auto px-4">
         <h1 class="font-4xl text-3xl font-bold mt-4 text-purple-600">
-          View your Questions
+          Ready to be corrected!
         </h1>
-        <p class="instructions">
-          <strong>Instructions:</strong> Choose a question from your inbox? <br />
-        </p>
-
         <div class="question-container">  
           {postsFromDB.map(post => (
             <article class="flex flex-col gap-2 p-6 border items-baseline rounded-md">
@@ -49,6 +61,23 @@ const postsFromDB = await prisma.posts.findMany({
                 {post?.post_language}
               </span>
               <p class="text-center">{post?.question}</p>
+            </article>
+          ))}
+        </div>
+        <h1 class="font-4xl text-3xl font-bold mt-4 text-purple-600">
+          View your responses
+        </h1>
+        <div class="question-container">  
+          {myResponses.map(response => (
+            <article class="flex flex-col gap-2 p-6 border items-baseline rounded-md">
+              <span class="inline-block px-2 bg-blue-200 text-xs uppercase font-medium text-blue-800 rounded-md">
+                {response?.post?.post_language}
+              </span>
+              <p class="text-center">{response?.post?.question}</p>
+              <p>Your response</p>
+              <p class="text-center">{response?.response_content}</p>
+              <p>Feedback</p>
+              <p class="text-center">{response?.response_comment}</p>
             </article>
           ))}
         </div>

@@ -37,7 +37,7 @@ const ListOfQuestions = ({ posts: dbposts }) => {
         </div>
       </ul>
       <div className="col-span-full sm:col-span-4 grid grid-cols-2 gap-2">
-        {/* .map works like a for loop in Astro so a Question component is created for each question */}
+        {/* .map works like a for loop so a Question component is created for each question */}
         {posts.map((post) => (
           <Question post={post} key={post.post_id} />
         ))}
