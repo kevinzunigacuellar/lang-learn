@@ -11,7 +11,12 @@ const response = await prisma.responses.findFirst({
   }
 });
 
-const post = response?.post
+const post = await prisma.posts.findFirst({
+  where: {
+    post_id: response?.post_id
+  }
+});
+
 ---
 <Layout title="Language Learner">
     <div class="content-container">
@@ -33,7 +38,7 @@ const post = response?.post
             </article>
             <!-- The other user's repsone -->
             <article class="flex flex-col gap-2 p-6 border items-baseline rounded-md">
-                <p>{response?.content}</p>
+                <p>{response?.response_content}</p>
               </article>
 
             <!-- The form to correct the response -->
