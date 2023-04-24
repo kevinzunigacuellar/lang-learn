@@ -35,6 +35,7 @@ export default function AnswerForm({post_id}) { // post_id is passed in from the
       console.log(errors);
     }
     setFormData(data);
+    window.location.href = "../inbox";
   }
   
 
