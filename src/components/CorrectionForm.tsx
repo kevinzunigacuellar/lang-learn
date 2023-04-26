@@ -1,47 +1,46 @@
 import { createSignal, createResource, Show } from "solid-js";
 import { correctionSchema } from "../lib/schemas";
-import "./style.css"
+import "./style.css";
 
 // Server request that submits a user's correction to a response
 async function correctionFormData(formData: FormData) {
-    const response = await fetch("/api/correction", {
-      method: "POST",
-      body: formData,
-    });
-    const data = await response.json();
-    return data;
-  }
+  const response = await fetch("/api/correction", {
+    method: "POST",
+    body: formData,
+  });
+  const data = await response.json();
+  return data;
+}
 
 // Form for submitting a correction to a response
-export default function CorrectionForm({response_id}) { // post_id is passed in from the documentId in the question page
-    // Create a signal for the form data and errors
-    const [formData, setFormData] = createSignal<FormData>();
-    const [errors, setErrors] = createSignal();
-    const [response] = createResource(formData, correctionFormData);
-  
-    // Called to sumbit the form data to the server
-    function submit(e: SubmitEvent) {
-      e.preventDefault();
-      setErrors(null);
-      const data = new FormData(e.currentTarget as HTMLFormElement);
-      const result = correctionSchema.safeParse(data);
-      console.log(result);
-      // Handle errors
-      if (!result.success) {
-        const errors = result.error.flatten();
-        setErrors(errors);
-        console.log(errors);
-      }
-      setFormData(data);
+export default function CorrectionForm({ response_id }) {
+  // post_id is passed in from the documentId in the question page
+  // Create a signal for the form data and errors
+  const [formData, setFormData] = createSignal<FormData>();
+  const [errors, setErrors] = createSignal();
+  const [response] = createResource(formData, correctionFormData);
+
+  // Called to sumbit the form data to the server
+  function submit(e: SubmitEvent) {
+    e.preventDefault();
+    setErrors(null);
+    const data = new FormData(e.currentTarget as HTMLFormElement);
+    const result = correctionSchema.safeParse(data);
+    // Handle errors
+    if (!result.success) {
+      const errors = result.error.flatten();
+      setErrors(errors);
     }
-    
-// HTML for the form
+    setFormData(data);
+  }
+
+  // HTML for the form
   return (
     <form onSubmit={submit}>
       <div class="flex-container">
         <div class="input p-4">
           <label class="selector-label" for="correction">
-            Correct the reponse: 
+            Correct the reponse:
           </label>
           <textarea
             id="correction_content"
@@ -51,7 +50,7 @@ export default function CorrectionForm({response_id}) { // post_id is passed in 
           >
             {/* todo: auto populate the user's reponse in the correction */}
             {/* {response?.post.answer_content} */}
-            </textarea>
+          </textarea>
         </div>
       </div>
       <div class="text-center" style="display: flex; justify-content: center;">

@@ -1,4 +1,4 @@
-// These schemas are used to validate the data sent to the server, ensuring that the data is of the correct format so that our 
+// These schemas are used to validate the data sent to the server, ensuring that the data is of the correct format so that our
 // database doesn't get corrupted. This is for securtiy of our database and to ensure that the data is in the correct format.
 import { zfd } from "zod-form-data";
 import { z } from "zod";
@@ -14,13 +14,13 @@ export const postSchema = zfd.formData({
 // validate data sent for creating a new answer/response to a post
 export const answerSchema = zfd.formData({
   answer_content: zfd.text(z.string().min(0).max(255)),
-  post_id: zfd.text(z.string().min(5).max(255))
+  post_id: zfd.text(z.string().min(5).max(255)),
 });
 
 // validate data sent for adding corrections to a repsonse
 export const correctionSchema = zfd.formData({
   correction_content: zfd.text(z.string().min(0).max(255)),
-  response_id: zfd.text(z.string().min(5).max(255))
+  response_id: zfd.text(z.string().min(5).max(255)),
 });
 
 // validate user passwords
@@ -35,8 +35,12 @@ const userPasswordSchema = z.object({
 const register = userPasswordSchema
   .extend({
     name: zfd.text(z.string().min(2, "Name must be at least 2 character long")),
-    username: zfd.text(z.string().min(2, "Username must be at least 2 character long")),
-    targetLanguage: zfd.text(z.string().min(2, "Target Language must be at least 2 character long")),
+    username: zfd.text(
+      z.string().min(2, "Username must be at least 2 character long")
+    ),
+    targetLanguage: zfd.text(
+      z.string().min(2, "Target Language must be at least 2 character long")
+    ),
     confirmPassword: zfd.text(
       z.string().min(8, "Password must be at least 8 characters long")
     ),

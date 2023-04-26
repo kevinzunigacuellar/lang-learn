@@ -1,7 +1,7 @@
 import { Suspense, createSignal, createResource, Show } from "solid-js";
 import { postSchema } from "../lib/schemas";
-import "./post-form.css"
-import "./style.css"
+import "./post-form.css";
+import "./style.css";
 
 // Post form for creating a new question
 async function postFormData(formData: FormData) {
@@ -9,8 +9,8 @@ async function postFormData(formData: FormData) {
     method: "POST",
     body: formData,
   });
-   
-  if (response.redirected){
+
+  if (response.redirected) {
     window.location.assign(response.url);
   }
 }
@@ -31,7 +31,6 @@ export default function PostForm() {
     if (!result.success) {
       const errors = result.error.flatten();
       setErrors(errors);
-      console.log(errors);
     }
     setFormData(data);
     window.location.href = "/..";
@@ -41,13 +40,13 @@ export default function PostForm() {
   return (
     <form onSubmit={submit}>
       <div class="flex-container">
-          <label class="selector-label" for="question">Create a Question:</label>
-          <input type="text" id="question" name="question">
-            {" "}
-          </input>
+        <label class="selector-label" for="question">
+          Create a Question:
+        </label>
+        <input type="text" id="question" name="question">
+          {" "}
+        </input>
 
-
-      
         <div class="selection-box">
           <label class="selector-label" for="difficulty">
             Choose a difficulty:
@@ -82,9 +81,9 @@ export default function PostForm() {
             <option value="French">French</option>
             <option value="English">English</option>
           </select>
-          </div>
+        </div>
       </div>
-      <div class = "btn-container">
+      <div class="btn-container">
         <button class="btn-97">Post</button>
       </div>
     </form>

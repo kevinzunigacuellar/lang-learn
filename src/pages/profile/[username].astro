@@ -6,8 +6,8 @@ import prisma from "../../lib/prisma";
 const username = Astro.params.username;
 const user = await prisma.user.findFirst({
   where: {
-    username: username
-  }
+    username: username,
+  },
 });
 ---
 

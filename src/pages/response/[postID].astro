@@ -3,7 +3,6 @@ import Layout from "../../layouts/Layout.astro";
 import prisma from "../../lib/prisma";
 import { auth } from "../../lib/firebase/server";
 
-
 // get user profile information via dynamic routing of the username in the url
 // const postID = Astro.params.postID;
 // const post = await prisma.user.findFirst({
@@ -11,8 +10,6 @@ import { auth } from "../../lib/firebase/server";
 //     post_id: postID,
 //   }
 // });
-
-
 
 /* Get session cookie */
 const sessionCookie = Astro.cookies.get("session").value;

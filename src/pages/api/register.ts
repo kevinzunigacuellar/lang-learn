@@ -5,7 +5,6 @@ import { registerSchema } from "../../lib/schemas";
 import prisma from "../../lib/prisma";
 import { getUserIdFromCookie } from "../../lib/utils";
 
-
 // register function
 export const post: APIRoute = async ({ request, redirect }) => {
   const formData = await request.formData();
@@ -31,7 +30,7 @@ export const post: APIRoute = async ({ request, redirect }) => {
       password,
       displayName: name,
     });
-    
+
     // add user to database
     await prisma.user.create({
       data: {
@@ -43,7 +42,6 @@ export const post: APIRoute = async ({ request, redirect }) => {
         id: userData.uid as string,
       },
     });
-
   } catch (error: any) {
     return new Response(
       JSON.stringify({
