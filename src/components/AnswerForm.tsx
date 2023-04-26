@@ -1,6 +1,6 @@
 import { Suspense, createSignal, createResource, Show } from "solid-js";
 import { answerSchema } from "../lib/schemas";
-import "./style.css"
+import "./style.css";
 
 // Server request that submits a user's answer to a question
 async function answerFormData(formData: FormData) {
@@ -9,13 +9,14 @@ async function answerFormData(formData: FormData) {
     body: formData,
   });
 
-  if (response.redirected){
+  if (response.redirected) {
     window.location.assign(response.url);
   }
 }
 
 // Form for submitting an answer to a question
-export default function AnswerForm({post_id}) { // post_id is passed in from the documentId in the question page
+export default function AnswerForm({ post_id }) {
+  // post_id is passed in from the documentId in the question page
   // Create a signal for the form data and errors
   const [formData, setFormData] = createSignal<FormData>();
   const [errors, setErrors] = createSignal();
@@ -26,19 +27,15 @@ export default function AnswerForm({post_id}) { // post_id is passed in from the
     e.preventDefault();
     setErrors(null);
     const data = new FormData(e.currentTarget as HTMLFormElement);
-    data.append("post_id", post_id)
+    data.append("post_id", post_id);
     const result = answerSchema.safeParse(data);
-    console.log(result);
     // Handle errors
     if (!result.success) {
       const errors = result.error.flatten();
       setErrors(errors);
-      console.log(errors);
     }
     setFormData(data);
-    
   }
-  
 
   // HTML for the form
   return (
@@ -46,7 +43,7 @@ export default function AnswerForm({post_id}) { // post_id is passed in from the
       <div class="flex-container">
         <div class="input p-4">
           <label class="selector-label" for="question">
-            Respond to the Question: 
+            Respond to the Question:
           </label>
           <textarea
             id="answer_content"

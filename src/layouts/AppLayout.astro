@@ -1,0 +1,30 @@
+---
+import Layout from "@layouts/Layout.astro";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<Layout title={title}>
+  <nav
+    class="flex justify-between items-center px-6 py-4 bg-violet-200 font-medium rounded-md m-4"
+  >
+    <a href="/" class="text-xl text-violet-600 hover:text-violet-700 font-bold"
+      >Language Learner</a
+    >
+    <ul class="flex gap-6 text-violet-600">
+      <li>
+        <a href="/inbox">Inbox</a>
+      </li>
+      <li>
+        <a href="/question">Ask</a>
+      </li>
+    </ul>
+  </nav>
+  <main class="max-w-3xl mx-auto px-4 mt-10">
+    <slot />
+  </main>
+</Layout>

@@ -5,8 +5,6 @@ import { getUserIdFromCookie } from "../../lib/utils";
 
 export const post: APIRoute = async ({ request, cookies, redirect }) => {
   const postData = await request.formData();
-  // console.log(postData);
-
   const result = postSchema.safeParse(postData);
 
   if (!result.success) {

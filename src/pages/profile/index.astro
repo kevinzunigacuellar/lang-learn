@@ -2,7 +2,7 @@
 // imports
 import Layout from "../../layouts/Layout.astro";
 import prisma from "../../lib/prisma";
-import { auth } from "../../lib/firebase/server"
+import { auth } from "../../lib/firebase/server";
 
 // get session cookie
 const sessionCookie = Astro.cookies.get("session").value;
@@ -15,76 +15,79 @@ try {
   const decodedClaims = await auth.verifySessionCookie(sessionCookie, true);
   user = await auth.getUser(decodedClaims.uid);
 } catch (error) {
-    console.log("Not logged in! Error: " + error);
   return Astro.redirect("/login");
 }
 
 // load in user data from the data base
 const userData = await prisma.user.findFirst({
-    where: {
-        id: user.uid,
-    }
+  where: {
+    id: user.uid,
+  },
 });
-console.log("your unique user ID: " + user.uid);
 ---
 
 <Layout title="Your Profile">
-    <main>
-        <div class="profile">
-            <h1>{userData?.name}</h1>
-            <p>A Language Learner</p>
-            <ul class="info">
-                <li><i class="email"></i>Email: {userData?.email} </li>
-                <li><i class="target-language"></i>Target Language: {userData?.target_language} </li>  
-                <br><br>
-                <li><i class="creation">Account Created On: {userData?.created_at} </i></li>
-            </ul>
-        </div>
-    </main>
-  </Layout>
-  
-  <style>
-    .profile {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 40px;
-        text-align: center;
-        border: 5px solid purple;
-        border-radius: 5px;
-    }
+  <main>
+    <div class="profile">
+      <h1>{userData?.name}</h1>
+      <p>A Language Learner</p>
+      <ul class="info">
+        <li><i class="email"></i>Email: {userData?.email}</li>
+        <li>
+          <i class="target-language"></i>Target Language: {
+            userData?.target_language
+          }
+        </li>
+        <br /><br />
+        <li>
+          <i class="creation">Account Created On: {userData?.created_at}</i>
+        </li>
+      </ul>
+    </div>
+  </main>
+</Layout>
 
-    .profile p {
-        font-size: 18px;
-        margin-bottom: 20px;
-    }
+<style>
+  .profile {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
+    text-align: center;
+    border: 5px solid purple;
+    border-radius: 5px;
+  }
 
-    .profile h1 {
-        font-size: 36px;
-        margin-bottom: 10px;
-        text-decoration: underline;
-    } 
+  .profile p {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
 
-    .info {
-        display: flex;
-        flex-wrap: wrap;
-        list-style: none;
-        padding: 0;
-        margin-bottom: 20px;
-        justify-content: center;
-    }
+  .profile h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    text-decoration: underline;
+  }
 
-    .info li {
-        font-size: 18px;
-        margin-right: 20px;
-    }
+  .info {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+    justify-content: center;
+  }
 
-    .info li:last-child {
-        margin-right: 0;
-    }
+  .info li {
+    font-size: 18px;
+    margin-right: 20px;
+  }
 
-    .info i {
-        margin-right: 10px;
-        color: #4CAF50;
-    }
-  </style>
-  
+  .info li:last-child {
+    margin-right: 0;
+  }
+
+  .info i {
+    margin-right: 10px;
+    color: #4caf50;
+  }
+</style>

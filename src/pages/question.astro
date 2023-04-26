@@ -1,7 +1,7 @@
 ---
-import Layout from "@layouts/Layout.astro";
 import PostForm from "@components/PostForm";
 import { getUserIdFromCookie } from "@lib/utils";
+import AppLayout from "@layouts/AppLayout.astro";
 
 /* Get session cookie */
 const sessionCookie = Astro.cookies.get("session").value;
@@ -14,10 +14,9 @@ const user = await getUserIdFromCookie(sessionCookie);
 if (!user) {
   return Astro.redirect("/login");
 }
-
 ---
 
-<Layout title="Ask a question!">
+<AppLayout title="Ask a question!">
   <main>
     <h1 class="font-4xl text-3xl font-bold mt-4 text-purple-600">
       Create a Question
@@ -30,7 +29,7 @@ if (!user) {
       <PostForm client:load />
     </div>
   </main>
-</Layout>
+</AppLayout>
 
 <style>
   .post-form-container {
