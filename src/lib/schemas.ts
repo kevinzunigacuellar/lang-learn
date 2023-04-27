@@ -5,9 +5,9 @@ import { z } from "zod";
 
 // validate data sent for creating a new post
 export const postSchema = zfd.formData({
-  question: zfd.text(z.string().min(5).max(255)),
+  question: zfd.text(z.string().min(0).max(255)),
   difficulty: zfd.text(z.enum(["Easy", "Medium", "Hard"])),
-  topic: zfd.text(z.enum(["Politics", "Daily Life", "Philosophy"])),
+  topic: zfd.text(z.enum(["Politics", "Philosophy"])),
   language: zfd.text(z.enum(["Spanish", "French", "English"])),
 });
 
