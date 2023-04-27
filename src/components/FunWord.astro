@@ -1,89 +1,87 @@
-<html>
-  <head>
-    <title id="title">:)</title>
-    <style>
-      #displayedTitle {
-        opacity: 0;
-        transition: opacity 1s ease-out;
-      }
-      #displayedTitle.fade-in {
-        opacity: 1;
-      }
-      #displayedTitle.fade-out {
-        opacity: 0;
-        transition: opacity 1s ease-out;
-      }
-      .slide-in {
-        transform: translateY(-100%);
-        animation: slide-in 1s ease-out forwards;
-      }
-      .slide-out {
-        animation: slide-out 1s ease-out forwards;
-      }
-      @keyframes slide-in {
-        100% {
-          transform: translateY(0);
-        }
-      }
-      @keyframes slide-out {
-        0% {
-          transform: translateY(0);
-        }
-        100% {
-          transform: translateY(100%);
-        }
-      }
-      h1 {
-        font-size: 3rem;
-        font-weight: 800;
-        margin: 0;
-      }
-      .text-gradient {
-        background-image: var(--accent-gradient);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-size: 400%;
-        background-position: 0%;
-      }
-      ul {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-      .site-title {
-        font-size: 1.5rem;
-        font-weight: 600;
-        margin: 0 1rem;
-      }
-    </style>
-    <script>
-      var i = 0;
-      var titles = ["¡Hola!", "你好!", "Bonjour! "];
+<h1 id="displayedTitle"></h1>
+<style>
+  #displayedTitle {
+    opacity: 0;
+    transition: opacity 1s ease-out;
+  }
+  #displayedTitle.fade-in {
+    opacity: 1;
+  }
+  #displayedTitle.fade-out {
+    opacity: 0;
+    transition: opacity 1s ease-out;
+  }
+  .slide-in {
+    transform: translateY(-100%);
+    animation: slide-in 1s ease-out forwards;
+  }
+  .slide-out {
+    animation: slide-out 1s ease-out forwards;
+  }
+  @keyframes slide-in {
+    100% {
+      transform: translateY(0);
+    }
+  }
+  @keyframes slide-out {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(100%);
+    }
+  }
+  h1 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    margin: 0;
+  }
+  .text-gradient {
+    background-image: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 400%;
+    background-position: 0%;
+  }
+  ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .site-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 1rem;
+  }
+</style>
+<script>
+  let i = 0;
+  let titles = ["¡Hola!", "你好!", "Bonjour! "];
 
-      // Execute first iteration immediately
-      var title = titles[i];
-      var elementById = document.getElementById("title");
-      if (elementById) {
-        elementById.innerHTML = title;
-      } else {
-        console.log("Error changing title");
-      }
-      var displayedTitle = document.getElementById("displayedTitle");
-      if (displayedTitle) {
-        displayedTitle.innerHTML = title;
-        displayedTitle.classList.add("slide-in", "fade-in");
-      } else {
-        console.log("Error changing displayed title");
-      }
+  // Execute first iteration immediately
+  let title = titles[i];
+  let elementById = document.getElementById("title");
+  if (elementById) {
+    elementById.innerHTML = title;
+  } else {
+    console.log("Error changing title");
+  }
+  let displayedTitle = document.getElementById("displayedTitle");
+  if (displayedTitle) {
+    displayedTitle.innerHTML = title;
+    displayedTitle.classList.add("slide-in", "fade-in");
+  } else {
+    console.log("Error changing displayed title");
+  }
 
-      i = (i + 1) % titles.length;
+  i = (i + 1) % titles.length;
 
-      // Execute subsequent iterations every 6 seconds
-      setInterval(function () {
+  // Execute subsequent iterations every 6 seconds
+  setInterval(function () {
         var title = titles[i];
         var elementById = document.getElementById("title");
 
@@ -101,20 +99,15 @@
           console.log("Error changing displayed title");
         }
 
-        setTimeout(function () {
-          if (displayedTitle) {
-            displayedTitle.innerHTML = title;
-            displayedTitle.classList.remove("fade-out");
-            displayedTitle.classList.add("slide-in", "fade-in");
-          } else {
-            console.log("Error changing displayed title");
-          }
-        }, 500);
-        i = (i + 1) % titles.length;
-      }, 6000);
-    </script>
-  </head>
-  <body>
-    <h1 id="displayedTitle"></h1>
-  </body>
-</html>
+    setTimeout(function () {
+      if (displayedTitle) {
+        displayedTitle.innerHTML = title;
+        displayedTitle.classList.remove("fade-out");
+        displayedTitle.classList.add("slide-in", "fade-in");
+      } else {
+        console.log("Error changing displayed title");
+      }
+    }, 500);
+    i = (i + 1) % titles.length;
+  }, 6000);
+</script>
