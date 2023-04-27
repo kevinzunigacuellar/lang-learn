@@ -20,7 +20,7 @@ const ListOfQuestions = ({ posts: dbposts }: { posts: any }) => {
   // The HTML for the list of questions
   return (
     <>
-      <div className="flex gap-2 mb-4">
+      <div className="flex gap-2 mb-4 overflow-x-auto sm:overflow-x-visible">
         {uniqueLanguages.map((language) => (
           <button
             key={language}
