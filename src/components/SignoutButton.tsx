@@ -1,4 +1,5 @@
-// called when the signout button is clicked
+/** @jsxImportSource solid-js */
+
 export default function SignoutButton() {
   async function signout() {
     const response = await fetch("/api/logout", {
@@ -6,7 +7,7 @@ export default function SignoutButton() {
     });
     // error handling
     if (!response.ok) {
-      throw new Error("Error signing out");
+      console.error("Failed to sign out", response);
     }
     if (response.redirected) {
       window.location.assign(response.url);
@@ -16,7 +17,7 @@ export default function SignoutButton() {
   // HTML for the signout button
   return (
     <button
-      class="bg-indigo-400 font-medium hover:bg-indigo-400 px-4 py-1 rounded-md"
+      class="border border-transparent text-white font-medium bg-violet-500 hover:bg-transparent hover:border-violet-500 hover:text-violet-700 transition-all px-4 py-1 rounded-md"
       type="button"
       onClick={signout}
     >
