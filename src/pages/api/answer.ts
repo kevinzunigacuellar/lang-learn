@@ -1,7 +1,7 @@
-import type { APIRoute, AstroGlobal } from "astro";
-import { answerSchema } from "../../lib/schemas";
-import prisma from "../../lib/prisma";
-import { getUserIdFromCookie } from "../../lib/utils";
+import type { APIRoute } from "astro";
+import { answerSchema } from "@lib/schemas";
+import prisma from "@lib/prisma";
+import { getUserIdFromCookie } from "@lib/utils";
 
 // Updates the database to create a response to a post
 export const post: APIRoute = async ({ request, cookies, redirect }) => {

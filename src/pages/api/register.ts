@@ -1,9 +1,8 @@
 // imports
-import { auth } from "../../lib/firebase/server";
+import { auth } from "@lib/firebase/server";
 import type { APIRoute } from "astro";
-import { registerSchema } from "../../lib/schemas";
-import prisma from "../../lib/prisma";
-import { getUserIdFromCookie } from "../../lib/utils";
+import { registerSchema } from "@lib/schemas";
+import prisma from "@lib/prisma";
 
 // register function
 export const post: APIRoute = async ({ request, redirect }) => {

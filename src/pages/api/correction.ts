@@ -1,6 +1,6 @@
-import type { APIRoute, AstroGlobal } from "astro";
-import { correctionSchema } from "../../lib/schemas";
-import prisma from "../../lib/prisma";
+import type { APIRoute } from "astro";
+import { correctionSchema } from "@lib/schemas";
+import prisma from "@lib/prisma";
 
 // Updates the database to include a correction on a user's response
 export const post: APIRoute = async ({ request, cookies }) => {
