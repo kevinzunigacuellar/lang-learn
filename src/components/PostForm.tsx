@@ -6,7 +6,6 @@ import type { z } from "zod";
 
 type ErrorsT = z.typeToFlattenedError<z.inferFormattedError<typeof postSchema>>;
 
-
 // Post form for creating a new question
 async function postFormData(formData: FormData) {
   const response = await fetch("/api/posts", {
@@ -34,8 +33,8 @@ export default function PostForm() {
     // Handle errors
     if (!result.success) {
       const errors = result.error.flatten() as ErrorsT;
-      setErrors(errors)
-      return 
+      setErrors(errors);
+      return;
     }
     setFormData(data);
   }

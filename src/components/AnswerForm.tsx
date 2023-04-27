@@ -50,10 +50,11 @@ export default function AnswerForm({ post_id }: { post_id: string }) {
         rows={6}
         class="block w-full rounded-md text-zinc-700 border border-zinc-300 focus:border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:bg-white"
       />
-      <button type="submit"
-      disabled={response.loading}
-          class="bg-pink-500 py-1.5 rounded-md mt-1 text-white font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-400 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-pink-600"
-          >
+      <button
+        type="submit"
+        disabled={response.loading}
+        class="bg-pink-500 py-1.5 rounded-md mt-1 text-white font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-400 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-pink-600"
+      >
         Post
       </button>
     </form>
