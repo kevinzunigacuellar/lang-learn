@@ -40,7 +40,7 @@ export default function AnswerForm({ post_id }: { post_id: string }) {
 
   // HTML for the form
   return (
-    <form onSubmit={submit} class="mt-4 flex flex-col gap-2">
+    <form onSubmit={submit} class="mt-4 flex flex-col gap-3">
       <label class="font-medium text-zinc-800" for="question">
         Respond to the Question:
       </label>
@@ -48,7 +48,7 @@ export default function AnswerForm({ post_id }: { post_id: string }) {
         id="answer_content"
         name="answer_content"
         rows={6}
-        class="block w-full mt-1 rounded-md text-zinc-700 border border-zinc-300 focus:border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:bg-white"
+        class="block w-full rounded-md text-zinc-700 border border-zinc-300 focus:border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:bg-white"
       />
       <button type="submit"
       disabled={response.loading}
