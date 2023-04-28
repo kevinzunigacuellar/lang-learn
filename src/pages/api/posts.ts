@@ -1,7 +1,7 @@
-import type { APIRoute, AstroGlobal } from "astro";
-import { postSchema } from "../../lib/schemas";
-import prisma from "../../lib/prisma";
-import { getUserIdFromCookie } from "../../lib/utils";
+import type { APIRoute } from "astro";
+import { postSchema } from "@lib/schemas";
+import prisma from "@lib/prisma";
+import { getUserIdFromCookie } from "@lib/utils";
 
 export const post: APIRoute = async ({ request, cookies, redirect }) => {
   const postData = await request.formData();
@@ -17,15 +17,15 @@ export const post: APIRoute = async ({ request, cookies, redirect }) => {
   }
 
   // gather post data
-  const { question, difficulty, topic, language } = result.data;
+  const { question, language } = result.data;
 
   /* get user */
   const session_cookie = cookies.get("session").value;
   if (!session_cookie) {
     return new Response();
   }
-  const user = await getUserIdFromCookie(session_cookie);
-  if (!user) {
+  const userId = await getUserIdFromCookie(session_cookie);
+  if (!userId) {
     return new Response(
       JSON.stringify({
         errors: "User not found",
@@ -35,15 +35,14 @@ export const post: APIRoute = async ({ request, cookies, redirect }) => {
   }
 
   // send data to db
-  await prisma.posts.create({
+  await prisma.question.create({
     data: {
       question: question,
       post_language: language,
-      has_response: false,
-      user_id: user,
+      user_id: userId,
     },
   });
 
   // redirect to home page
-  return redirect("/", 301);
+  return redirect("/inbox/", 301);
 };

@@ -21,26 +21,35 @@ export const post: APIRoute = async ({ request, cookies, redirect }) => {
   const { post_id, answer_content } = result.data;
 
   // get the user's id to attribute the response to them
-  const session_cookie = cookies.get("session");
+  const session_cookie = cookies.get("session").value;
   if (!session_cookie) {
     return new Response();
   }
-  const user = getUserIdFromCookie(String(session_cookie));
+  const userId = await getUserIdFromCookie(session_cookie);
+  console.log(userId, post_id, answer_content);
+  if (!userId) {
+    return new Response(
+      JSON.stringify({
+        errors: "User not found",
+      }),
+      { status: 400 }
+    );
+  }
 
   // creates a new entry to the responses table in the database
-  await prisma.responses.create({
+  await prisma.response.create({
     data: {
-      response_content: answer_content,
-      response_comment: "",
-      post_id: post_id,
-      user_id: String(user),
+      content: answer_content,
+      user_id: userId,
+      feedback: "",
+      question_id: post_id,
     },
   });
 
   // Updates the post to show that it has a response
-  await prisma.posts.update({
+  await prisma.question.update({
     where: {
-      post_id: post_id,
+      id: post_id,
     },
     data: {
       has_response: true,

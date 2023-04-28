@@ -1,12 +1,18 @@
 /** @jsxImportSource solid-js */
 
-import { createSignal, createResource, Show } from "solid-js";
+import { createSignal, createResource } from "solid-js";
 import { postSchema } from "@lib/schemas";
 import type { z } from "zod";
 
 type ErrorsT = z.typeToFlattenedError<z.inferFormattedError<typeof postSchema>>;
 
-// Post form for creating a new question
+// Form for submitting a new question
+export default function PostForm() {
+  const [formData, setFormData] = createSignal<FormData>();
+  const [errors, setErrors] = createSignal<ErrorsT>();
+  const [response] = createResource(formData, postFormData);
+
+  // Post form for creating a new question
 async function postFormData(formData: FormData) {
   const response = await fetch("/api/posts", {
     method: "POST",
@@ -17,12 +23,6 @@ async function postFormData(formData: FormData) {
     window.location.assign(response.url);
   }
 }
-
-// Form for submitting a new question
-export default function PostForm() {
-  const [formData, setFormData] = createSignal<FormData>();
-  const [errors, setErrors] = createSignal<ErrorsT>();
-  const [response] = createResource(formData, postFormData);
 
   // Called to sumbit the form data to the server
   function submit(e: SubmitEvent) {

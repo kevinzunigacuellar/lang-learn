@@ -7,9 +7,9 @@ import Heading from "@components/Heading.astro";
 
 // get user post information via dynamic routing in the url
 const id = Astro.params.documentId;
-const post = await prisma.posts.findFirst({
+const post = await prisma.question.findUnique({
   where: {
-    post_id: id,
+    id: id,
   },
 });
 ---

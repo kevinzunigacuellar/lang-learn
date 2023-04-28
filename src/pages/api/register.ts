@@ -1,10 +1,8 @@
-// imports
 import { auth } from "@lib/firebase/server";
 import type { APIRoute } from "astro";
 import { registerSchema } from "@lib/schemas";
 import prisma from "@lib/prisma";
 
-// register function
 export const post: APIRoute = async ({ request, redirect }) => {
   const formData = await request.formData();
   const result = registerSchema.safeParse(formData);
@@ -23,22 +21,21 @@ export const post: APIRoute = async ({ request, redirect }) => {
   const { email, password, name, username, targetLanguage } = result.data;
 
   try {
-    // add usr to firebase
+    // create user in firebase
     const userData = await auth.createUser({
       email,
       password,
       displayName: name,
     });
 
-    // add user to database
+    // using the user id from firebase, create a user in prisma
     await prisma.user.create({
       data: {
         name: name,
         username: username,
         email: email,
         target_language: targetLanguage,
-        firebase_id: userData.uid as string,
-        id: userData.uid as string,
+        id: userData.uid,
       },
     });
   } catch (error: any) {

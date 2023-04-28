@@ -16,18 +16,18 @@ const { title } = Astro.props;
     <a href="/" class="sm:text-xl text-zinc-700 hover:text-zinc-800 font-bold"
       >Language Learner</a
     >
-  </div>
-    <ul class="flex gap-6 text-violet-600 items-center">
-      <li>
-        <a href="/inbox">Inbox</a>
-      </li>
-      <li>
-        <a href="/question">Ask</a>
-      </li>
-      <SignoutButton client:idle />
-    </ul>
-  </nav>
-  <main class="max-w-3xl mx-auto px-4 sm:mt-10 mt-6">
-    <slot />
-  </main>
+  
+  <ul class="flex gap-6 text-violet-600 items-center">
+    <li>
+      <a href="/inbox">Inbox</a>
+    </li>
+    <li>
+      <a href="/question">Ask</a>
+    </li>
+    <SignoutButton client:idle />
+  </ul>
+</nav>
 </Layout>
+<main class="max-w-3xl mx-auto px-4 sm:mt-10 mt-6">
+  <slot />
+</main>

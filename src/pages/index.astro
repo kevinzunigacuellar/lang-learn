@@ -19,7 +19,7 @@ if (!userId) {
 }
 
 /* load posts from db */
-const posts = await prisma.posts.findMany();
+const posts = await prisma.question.findMany();
 ---
 
 <AppLayout title="Language Learner - Dashboard">

@@ -16,39 +16,38 @@ model User {
   username        String
   email           String
   target_language String
-  id              String      @id @default(cuid())
-  firebase_id     String
+  id              String      @id @unique
   created_at      DateTime    @default(now())
   updated_at      DateTime    @updatedAt
-  Responses       Responses[]
-  Posts           Posts[]
+  Responses       Response[]
+  Posts           Question[]
 }
 
-model Responses {
-  response_id      String   @id @default(cuid())
-  response_content String
-  response_comment String
+model Response {
+  id               String   @id @default(cuid())
+  content          String
+  feedback         String
   user             User     @relation(fields: [user_id], references: [id])
   user_id          String
-  post             Posts    @relation(fields: [post_id], references: [post_id])
-  post_id          String
+  question         Question  @relation(fields: [question_id], references: [id])
+  question_id      String    @unique
   created_at       DateTime @default(now())
   updated_at       DateTime @updatedAt
 
-  @@index([post_id])
+  @@index([question_id])
   @@index([user_id])
 }
 
-model Posts {
-  post_id       String      @id @default(cuid())
+model Question {
+  id            String      @id @default(cuid())
   question      String
-  has_response  Boolean
+  has_response  Boolean?    @default(false)
   user          User        @relation(fields: [user_id], references: [id])
   user_id       String
   post_language String
   created_at    DateTime    @default(now())
   updated_at    DateTime    @updatedAt
-  Responses     Responses[]
+  Response     Response?
 
   @@index([user_id])
 }

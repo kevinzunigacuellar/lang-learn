@@ -3,7 +3,7 @@ import { correctionSchema } from "@lib/schemas";
 import prisma from "@lib/prisma";
 
 // Updates the database to include a correction on a user's response
-export const post: APIRoute = async ({ request, cookies }) => {
+export const post: APIRoute = async ({ request, redirect }) => {
   const correctionData = await request.formData();
   const result = correctionSchema.safeParse(correctionData); // validate the data
 
@@ -18,22 +18,18 @@ export const post: APIRoute = async ({ request, cookies }) => {
   }
 
   const { response_id, correction_content } = result.data;
+  console.log(response_id, correction_content);
 
   // updates the database to include the correction
-  await prisma.responses.update({
+  await prisma.response.update({
     where: {
-      response_id: response_id,
+      id: response_id,
     },
     data: {
-      response_content: correction_content,
+      feedback: correction_content,
     },
   });
 
   // returns a success message
-  return new Response(
-    JSON.stringify({
-      message: "Successfully responded to post & saved to DB",
-    }),
-    { status: 200 }
-  );
+  return redirect("/inbox/")
 };
