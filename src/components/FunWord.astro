@@ -82,22 +82,22 @@
 
   // Execute subsequent iterations every 6 seconds
   setInterval(function () {
-        var title = titles[i];
-        var elementById = document.getElementById("title");
+    var title = titles[i];
+    var elementById = document.getElementById("title");
 
-        if (elementById) {
-          elementById.innerHTML = title;
-        } else {
-          console.log("Error changing title");
-        }
-        var displayedTitle = document.getElementById("displayedTitle");
-        if (displayedTitle) {
-          displayedTitle.innerHTML = title;
-          displayedTitle.classList.remove("fade-in");
-          displayedTitle.classList.add("fade-out");
-        } else {
-          console.log("Error changing displayed title");
-        }
+    if (elementById) {
+      elementById.innerHTML = title;
+    } else {
+      console.log("Error changing title");
+    }
+    var displayedTitle = document.getElementById("displayedTitle");
+    if (displayedTitle) {
+      displayedTitle.innerHTML = title;
+      displayedTitle.classList.remove("fade-in");
+      displayedTitle.classList.add("fade-out");
+    } else {
+      console.log("Error changing displayed title");
+    }
 
     setTimeout(function () {
       if (displayedTitle) {

@@ -1,0 +1,46 @@
+---
+interface Props {
+  post: {
+    question: string;
+    post_language: string;
+    has_response: boolean | null;
+    id: string;
+    Response: {
+      id: string;
+    } | null;
+  };
+}
+
+const { question, post_language, has_response, id, Response  } = Astro.props.post;
+---
+
+<article
+  class="flex flex-col gap-2 p-6 border items-baseline bg-white rounded-md"
+>
+<div class="flex gap-2">
+  <span
+    class="inline-block px-2 bg-blue-200 text-xs uppercase font-medium text-blue-800 rounded-md"
+  >
+    {post_language}
+  </span>
+  {
+    has_response ? (
+      <a
+        href={`/correction/${Response?.id}`}
+        class="inline-block px-2 bg-green-200 text-xs uppercase font-medium text-green-800 rounded-md"
+      >
+        Provide feedback
+      </a>
+    ) : (
+      <span
+        
+        class="inline-block px-2 bg-red-200 text-xs uppercase font-medium text-red-800 rounded-md"
+      >
+        Not answered
+      </span>
+      
+    )
+  }
+  </div>
+  <p class="text-center">{question}</p>
+</article>

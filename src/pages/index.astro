@@ -1,9 +1,10 @@
 ---
-import NewQButton from "@components/NewQButton.astro";
 import ListOfQuestions from "@components/ListOfQuestions";
 import { getUserIdFromCookie } from "@lib/utils";
 import prisma from "@lib/prisma";
 import AppLayout from "@layouts/AppLayout.astro";
+import Heading from "@components/Heading.astro";
+import Instructions from "@components/Instructions.astro";
 
 /* Get session cookie */
 const sessionCookie = Astro.cookies.get("session").value;
@@ -18,16 +19,13 @@ if (!userId) {
 }
 
 /* load posts from db */
-const posts = await prisma.posts.findMany();
+const posts = await prisma.question.findMany();
 ---
 
 <AppLayout title="Language Learner - Dashboard">
-  <h1 class="text-3xl font-bold mt-4 text-violet-700">Choose a question</h1>
-  <p class="bg-white p-4 border-2 border-violet-300 mt-6 mb-6 rounded-md">
-    <strong class="text-violet-600">Instructions:</strong> Choose a question that
-    interests you and submit your response
-  </p>
-  <div>
-    <ListOfQuestions posts={posts} client:load />
-  </div>
+  <Heading title="Choose a question" />
+  <Instructions
+    description="Choose a question that interests you and submit your response"
+  />
+  <ListOfQuestions posts={posts} client:load />
 </AppLayout>

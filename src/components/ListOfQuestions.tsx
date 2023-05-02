@@ -17,10 +17,23 @@ const ListOfQuestions = ({ posts: dbposts }: { posts: any }) => {
     setPosts(dbposts.filter((post: any) => post.post_language === language));
   };
 
+  if (posts.length === 0)
+    return (
+      <div className="bg-white p-4 rounded-md grid grid-cols-1 place-items-center">
+        <p className="text-xl font-semibold mb-2">No questions found 😭</p>
+        <a
+          className="text-violet-800 px-4 bg-violet-200 border border-transparent hover:border-violet-400 py-1 font-semibold rounded-md"
+          href="/question/"
+        >
+          Add a new one
+        </a>
+      </div>
+    );
+
   // The HTML for the list of questions
   return (
     <>
-      <div className="flex gap-2 mb-4">
+      <div className="flex gap-2 mb-4 overflow-x-auto sm:overflow-x-visible">
         {uniqueLanguages.map((language) => (
           <button
             key={language}
@@ -38,7 +51,7 @@ const ListOfQuestions = ({ posts: dbposts }: { posts: any }) => {
 
       <div className="grid grid-cols-1 gap-4">
         {posts.map((post: any) => (
-          <Question post={post} key={post.post_id} />
+          <Question post={post} key={post.id} />
         ))}
       </div>
     </>
@@ -49,7 +62,7 @@ const ListOfQuestions = ({ posts: dbposts }: { posts: any }) => {
 function Question({ post }: { post: any }) {
   return (
     <a
-      href={`/question/${post.post_id}/`}
+      href={`/question/${post.id}/`}
       className="flex flex-col gap-2 p-6 shadow items-baseline rounded-md bg-white hover:shadow-md transition-all"
     >
       <span className="inline-block px-2 bg-blue-200 text-xs uppercase font-medium text-blue-800 rounded">

@@ -1,8 +1,10 @@
 ---
 import prisma from "@lib/prisma";
 import { getUserIdFromCookie } from "@lib/utils";
-import "../components/style.css";
 import AppLayout from "@layouts/AppLayout.astro";
+import Heading from "@components/Heading.astro";
+import Instructions from "@components/Instructions.astro";
+import QuestionCard from "@components/QuestionCard.astro";
 
 /* Get session cookie */
 const sessionCookie = Astro.cookies.get("session").value;
@@ -10,170 +12,83 @@ if (!sessionCookie) {
   return Astro.redirect("/login");
 }
 /* Verify session cookie and get user */
-const user = await getUserIdFromCookie(sessionCookie);
+const userId = await getUserIdFromCookie(sessionCookie);
 
-if (!user) {
+if (!userId) {
   return Astro.redirect("/login");
 }
 /* find my posts */
-const postsFromDB = await prisma.posts.findMany({
+const postsFromDB = await prisma.question.findMany({
   where: {
-    user_id: user,
+    user_id: userId,
   },
   select: {
     question: true,
-    post_id: true,
+    id: true,
     has_response: true,
     post_language: true,
+    Response: {
+      select: {
+        id: true,
+      },
+    },
   },
 });
 
 /* Find my responses that have comments attached */
-const myResponses = await prisma.responses.findMany({
+const myResponses = await prisma.response.findMany({
   where: {
-    user_id: user,
-    NOT: {
-      response_comment: undefined,
-    },
+    user_id: userId,
   },
   select: {
-    response_id: true,
-    response_content: true,
-    response_comment: true,
-    post_id: true,
-    post: true,
+    content: true,
+    feedback: true,
+    id: true,
+    question: {
+      select: {
+        question: true,
+        post_language: true,
+        has_response: true,
+        id: true,
+      },
+    },
   },
 });
 ---
 
 <AppLayout title="Inbox">
-  <div class="content-container">
-    <div class="max-w-3xl mx-auto px-4">
-      <h1 class="font-4xl text-3xl font-bold mt-4 text-purple-600">
-        Ready to be corrected!
-      </h1>
-      <div class="question-container">
-        {
-          postsFromDB.map((post) => (
-            <article class="flex flex-col gap-2 p-6 border items-baseline rounded-md">
+  <div class="max-w-3xl mx-auto">
+    <Heading title="Inbox" />
+    <Instructions description="Check your questions and answers here" />
+    <Heading title="My questions" />
+    <div class="grid grid-cols-1 gap-4 mt-4">
+      {postsFromDB.length > 0 ? postsFromDB.map((post) => <QuestionCard post={post} />) : 
+      <p class="p-4 bg-white border rounded-md mt-4">You have not posted any questions yet.</p>}
+    </div>
+    <Heading title="My answers" />
+    <div class="grid grid-cols-1 gap-4">
+    {
+      myResponses.length > 0 ? myResponses.map((response) => (
+        <div class="mt-4">
+          <div class="border rounded-md p-2 grid grid-cols-1 gap-2">
+            <article class="flex flex-col gap-2 p-6 border items-baseline bg-white rounded-md">
               <span class="inline-block px-2 bg-blue-200 text-xs uppercase font-medium text-blue-800 rounded-md">
-                {post?.post_language}
+                {response.question.post_language}
               </span>
-              <p class="text-center">{post?.question}</p>
+              <p class="text-center">{response.question.question}</p>
             </article>
-          ))
-        }
-      </div>
-      <h1 class="font-4xl text-3xl font-bold mt-4 text-purple-600">
-        View your responses
-      </h1>
-      <div class="question-container">
-        {
-          myResponses.map((response) => (
-            <article class="flex flex-col gap-2 p-6 border items-baseline rounded-md">
-              <span class="inline-block px-2 bg-blue-200 text-xs uppercase font-medium text-blue-800 rounded-md">
-                {response?.post?.post_language}
-              </span>
-              <p class="text-center">{response?.post?.question}</p>
-              <p>Your response</p>
-              <p class="text-center">{response?.response_content}</p>
-              <p>Feedback</p>
-              <p class="text-center">{response?.response_comment}</p>
-            </article>
-          ))
-        }
-      </div>
+            <div class="p-4 bg-white rounded border">
+              <strong>Response: </strong>
+              {response.content}
+            </div>
+            {response.feedback ? <div class="p-4 bg-white rounded border">
+              <strong>Feedback: </strong>
+              {response.feedback}
+            </div> : null}
+          </div>
+        </div>
+      )) : <p class="p-4 bg-white border rounded-md mt-4">You have not answered any questions yet.</p>
+    }
     </div>
   </div>
 </AppLayout>
-
-<style>
-  .question-container {
-    background-color: white;
-    border: 2px solid rgba(var(--accent), 25%);
-    padding: 2rem;
-    border-radius: 0.4rem;
-    max-width: 800px;
-    margin: 2rem auto;
-  }
-  .flex-container {
-    display: flex;
-    flex-wrap: nowrap;
-    width: 100%;
-    text-align: center;
-    line-height: 225%;
-  }
-
-  .selection-box {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    width: 30%;
-    margin: 5%;
-  }
-
-  .post-button {
-    float: right;
-    margin-right: 7%;
-    background-color: #18ab29;
-    border-radius: 20px;
-    border: 2px solid #18ab29;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 16px 16px;
-    text-decoration: none;
-  }
-  .post-button:hover {
-    background-color: #5cbf2a;
-  }
-  .post-button:active {
-    position: relative;
-    top: 1px;
-  }
-
-  button {
-    border: 1px solid black;
-    margin: 5px;
-    padding: 5px;
-  }
-  .button-container {
-    position: fixed;
-    top: 400px;
-    right: 20px;
-  }
-  .content-container {
-    margin-top: 50px;
-  }
-  .instructions {
-    line-height: 1.6;
-    margin: 1rem auto;
-    border: 2px solid rgba(var(--accent), 25%);
-    background-color: white;
-    padding: 1rem;
-    border-radius: 0.4rem;
-    max-width: 800px;
-  }
-
-  .instructions code {
-    font-size: 0.875em;
-    font-weight: bold;
-    background: rgba(var(--accent), 12%);
-    color: rgb(var(--accent));
-    border-radius: 4px;
-    padding: 0.3em 0.45em;
-    max-width: 90%;
-  }
-
-  .instructions strong {
-    color: rgb(var(--accent));
-  }
-  .font-4xl {
-    text-align: center;
-    margin-top: 50px;
-  }
-
-  .instructions {
-    text-align: center;
-  }
-</style>
